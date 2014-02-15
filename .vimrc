@@ -107,3 +107,10 @@ syntax on
 " ---------------------------------------------------------------------------------------------------
 set backspace=start,eol,indent
 "imap <c-> <esc>
+
+" Indent
+" ---------------------------------------------------------------------------------------------------
+set noexpandtab
+set tabstop=4 shiftwidth=4 softtabstop=0
+set autoindent smartindent
+
