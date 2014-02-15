@@ -39,12 +39,12 @@ NeoBundle 'ujihisa/unite-colorscheme'
 NeoBundle 'tomasr/molokai'
 
 " VimFiler Setting
-autocmd VimEnter * VimFiler -split -simple -winwidth=30 -no-quit
+" autocmd VimEnter * VimFiler -split -simple -winwidth=30 -no-quit
  
-let g:vimfiler_as_default_explorer = 1
-let g:vimfiler_safe_mode_by_default=0
-let g:netrw_liststyle=3
-
+" let g:vimfiler_as_default_explorer = 1
+" let g:vimfiler_safe_mode_by_default=0
+" let g:netrw_liststyle=3
+let g:vimfiler_edit_action = 'tabopen'
 
 " Brief help
 " :NeoBundleList          - list configured bundles
@@ -73,6 +73,9 @@ xmap <C-l> <Plug>(textmanip-move-right)
 nnoremap <silent> vs :VimShell<CR>
 nnoremap <silent> vsc :VimShellCreate<CR>
 nnoremap <silent> vp :VimShellPop<CR>
+
+nnoremap <silent> vf :VimFiler<CR>
+
 
 
 " Folding 
