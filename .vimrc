@@ -38,6 +38,24 @@ NeoBundle 'Shougo/unite.vim'
 NeoBundle 'ujihisa/unite-colorscheme'
 NeoBundle 'tomasr/molokai'
 
+" C# {{{
+" ---------------------------------------------------------------------------------------------------
+NeoBundleLazy 'nosami/Omnisharp', {
+\   'autoload': {'filetypes': ['cs']},
+\	'build': {
+\		'windows' : 'MSBuild.exe server/OmniSharp.sln /p:Platform="Any CPU"',
+\		'mac'     : 'xbuild server/OmniSharp.sln',
+\		'unix'    : 'xbuild server/OmniSharp.sln',
+\	}
+\ }
+augroup END
+" }}}
+
+if !exists('g:neocomplcache_force_omni_patterns')
+  let g:neocomplcache_force_omni_patterns = {}
+endif
+let g:neocomplcache_force_omni_patterns.cs = '[^.]\.\%(\u\{2,}\)\?'
+
 " VimFiler Setting
 " autocmd VimEnter * VimFiler -split -simple -winwidth=30 -no-quit
  
@@ -53,6 +71,7 @@ let g:vimfiler_edit_action = 'tabopen'
 
 " Installation check.
 NeoBundleCheck
+
 
 filetype on
 filetype plugin indent on
