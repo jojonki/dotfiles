@@ -1,4 +1,3 @@
-set nocompatible
 filetype off
 
 if has("vim_starting")
@@ -9,21 +8,6 @@ endif
 call neobundle#rc(expand('~/.vim/bundle/'))
 NeoBundleFetch 'Shougo/neobundle.vim'
 
-" Recommended to install
-NeoBundle 'Shougo/vimproc', {
-      \ 'build' : {
-      \     'windows' : 'make -f make_mingw32.mak',
-      \     'cygwin' : 'make -f make_cygwin.mak',
-      \     'mac' : 'make -f make_mac.mak',
-      \     'unix' : 'make -f make_unix.mak',
-      \    },
-      \ }
-
-" My Bundles here:
-" Refer to |:NeoBundle-examples|.
-"
-" Note: You don't set neobundle setting in .gvimrc!
-
 NeoBundle 'Shougo/neocomplete.vim' 
 NeoBundle 'Shougo/unite.vim'
 NeoBundle 'Shougo/vimproc.vim'
@@ -32,49 +16,17 @@ NeoBundle 'Shougo/vimfiler.vim'
 NeoBundle 'itchyny/lightline.vim'
 NeoBundle 't9md/vim-textmanip'
 
-" molokai カラースキーム
-" カラースキーム一覧表示に Unite.vim を使う
 NeoBundle 'Shougo/unite.vim'
 NeoBundle 'ujihisa/unite-colorscheme'
 NeoBundle 'tomasr/molokai'
 
-" C# {{{
-" ---------------------------------------------------------------------------------------------------
-NeoBundleLazy 'nosami/Omnisharp', {
-\   'autoload': {'filetypes': ['cs']},
-\	'build': {
-\		'windows' : 'MSBuild.exe server/OmniSharp.sln /p:Platform="Any CPU"',
-\		'mac'     : 'xbuild server/OmniSharp.sln',
-\		'unix'    : 'xbuild server/OmniSharp.sln',
-\	}
-\ }
-augroup END
-" }}}
-
-if !exists('g:neocomplcache_force_omni_patterns')
-  let g:neocomplcache_force_omni_patterns = {}
-endif
-let g:neocomplcache_force_omni_patterns.cs = '[^.]\.\%(\u\{2,}\)\?'
-
-" VimFiler Setting
-" autocmd VimEnter * VimFiler -split -simple -winwidth=30 -no-quit
- 
-" let g:vimfiler_as_default_explorer = 1
-" let g:vimfiler_safe_mode_by_default=0
-" let g:netrw_liststyle=3
-let g:vimfiler_edit_action = 'tabopen'
-
-" Brief help
-" :NeoBundleList          - list configured bundles
-" :NeoBundleInstall(!)    - install(update) bundles
-" :NeoBundleClean(!)      - confirm(or auto-approve) removal of unused bundles
 
 " Installation check.
 NeoBundleCheck
 
-
 filetype on
 filetype plugin indent on
+
 
 " Prefix
 " ---------------------------------------------------------------------------------------------------
@@ -136,3 +88,6 @@ set noexpandtab
 set tabstop=4 shiftwidth=4 softtabstop=0
 set autoindent smartindent
 
+" Color
+" ---------------------------------------------------------------------------------------------------
+colorscheme molokai
