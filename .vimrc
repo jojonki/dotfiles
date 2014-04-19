@@ -10,7 +10,14 @@ NeoBundleFetch 'Shougo/neobundle.vim'
 
 NeoBundle 'Shougo/neocomplete.vim' 
 NeoBundle 'Shougo/unite.vim'
-NeoBundle 'Shougo/vimproc.vim'
+NeoBundle 'Shougo/vimproc', {
+			\	'build' : {
+			\		'windows' : 'make -f make_mingw64.mak',
+			\		'cygwin'  : 'make -f make_cygwin.mak',
+			\		'mac'     : 'make -f make_mac.mak',
+			\		'unix'    : 'make -f make_unix.mak',
+			\	},
+			\ }
 NeoBundle 'Shougo/vimshell.vim'
 NeoBundle 'Shougo/vimfiler.vim'
 NeoBundle 'itchyny/lightline.vim'
@@ -23,6 +30,7 @@ NeoBundle 'altercation/vim-colors-solarized'
 NeoBundle 'glidenote/memolist.vim'
 NeoBundle 'fuenor/qfixgrep'
 NeoBundle 'tpope/vim-surround'
+NeoBundle 'mattn/emmet-vim'
 
 " Installation check.
 NeoBundleCheck
