@@ -33,7 +33,12 @@ NeoBundle 'tpope/vim-surround'
 NeoBundle 'mattn/emmet-vim'
 NeoBundle 'thinca/vim-quickrun'
 
-" Installation check.
+" vim-quickrun-markdown-gfm
+NeoBundle 'thinca/vim-quickrun'
+NeoBundle 'mattn/webapi-vim'
+NeoBundle 'tyru/open-browser.vim'
+NeoBundle 'superbrothers/vim-quickrun-markdown-gfm'
+
 NeoBundleCheck
 
 filetype on
@@ -80,6 +85,9 @@ nnoremap [prefix]mn :set noimdisable<CR>:MemoNew<CR>
 nnoremap [prefix]ml :MemoList<CR>
 nnoremap [prefix]mg :MemoGrep<CR>
 
+" Quickrun
+nnoremap [prefix]rm :QuickRun markdown<CR>
+
 " parameters
 let g:memolist_path              = '~/memo'
 let g:memolist_memo_suffix       = 'txt'
@@ -95,6 +103,13 @@ augroup MemoSetFileType
 	autocmd BufNewFile,BufRead *.txt set filetype=memo
 augroup END
 
+" vim-quickrun-markdown
+let g:quickrun_config = {
+			\   'markdown': {
+			\     'type': 'markdown/gfm',
+			\     'outputter': 'browser'
+			\   }
+			\ }
 
 syntax on
 set nocompatible
@@ -120,12 +135,6 @@ augroup end
 
 let g:SimpleJsIndenter_BriefMode = 1
 
-let g:quickrun_config = {
-\   "_" : {
-\       "outputter/buffer/split" : ":botright",
-\       "outputter/buffer/close_on_empty" : 1
-\   },
-\}
 
 " View
 set number
