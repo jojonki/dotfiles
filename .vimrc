@@ -1,4 +1,4 @@
-filetype off
+﻿filetype off
 
 if has("vim_starting")
   set nocompatible
@@ -31,6 +31,7 @@ NeoBundle 'glidenote/memolist.vim'
 NeoBundle 'fuenor/qfixgrep'
 NeoBundle 'tpope/vim-surround'
 NeoBundle 'mattn/emmet-vim'
+NeoBundle 'thinca/vim-quickrun'
 
 " Installation check.
 NeoBundleCheck
@@ -46,25 +47,38 @@ nmap ,   [prefix]
 xnoremap [prefix] <nop>
 xmap ,   [prefix]
 
-" 選択したテキストの移動
-xmap <C-k> <Plug>(textmanip-move-up)
-xmap <C-j> <Plug>(textmanip-move-down)
-xmap <C-h> <Plug>(textmanip-move-left)
-xmap <C-l> <Plug>(textmanip-move-right) 
+nnoremap [unite] <nop>
+xnoremap [unite] <nop>
+nmap <Space> [unite]
+xmap <Space> [unite]
 
-nnoremap <silent> vs :VimShell<CR>
-nnoremap <silent> vsc :VimShellCreate<CR>
-nnoremap <silent> vp :VimShellPop<CR>
+" Unite
+nnoremap [unite]  :Unite
+nnoremap [unite]b :Unite buffer<CR>
+nnoremap [unite]o :Unite bookmark<CR>
+"nnoremap [unite]f :Unite find<CR>
+"nnoremap [unite]g :Unite grep<CR>
+"nnoremap [unite]k :Unite fhc<CR>
+"nnoremap [unite]l :Unite line<CR>
+"nnoremap [unite]m :Unite menu<CR>
+"nnoremap [unite]o :Unite outline<CR>
+"nnoremap [unite]s :Unite snippet<CR>
+"nnoremap [unite]t :Unite tab<CR>
 
-nnoremap <silent> vf :VimFiler<CR>
+" VimFiler
+nnoremap [prefix]vf     :VimFiler<CR>
+nnoremap [prefix]vfe    :VimFilerExplorer<CR>
 
+" VimShell
+nnoremap [prefix]vs  	:VimShell<CR>
+nnoremap [prefix]vsi 	:VimShellInteractive<CR>
+nnoremap [prefix]vsc 	:VimShellCreate<CR>
+nnoremap [prefix]vsp 	:VimShellPop<CR>
 
-" MemoList.vim {{{
-"====================================================================================================
-" map
-nnoremap mn :set noimdisable<CR>:MemoNew<CR>
-nnoremap ml :MemoList<CR>
-nnoremap mg :MemoGrep<CR>
+" MemoList.vim 
+nnoremap [prefix]mn :set noimdisable<CR>:MemoNew<CR>
+nnoremap [prefix]ml :MemoList<CR>
+nnoremap [prefix]mg :MemoGrep<CR>
 
 " parameters
 let g:memolist_path              = '~/memo'
@@ -80,7 +94,7 @@ augroup MemoSetFileType
 	autocmd!
 	autocmd BufNewFile,BufRead *.txt set filetype=memo
 augroup END
-" }}}
+
 
 syntax on
 set nocompatible
@@ -106,6 +120,13 @@ augroup end
 
 let g:SimpleJsIndenter_BriefMode = 1
 
+let g:quickrun_config = {
+\   "_" : {
+\       "outputter/buffer/split" : ":botright",
+\       "outputter/buffer/close_on_empty" : 1
+\   },
+\}
+
 " View
 set number
 
@@ -114,3 +135,4 @@ colorscheme molokai
 " Color
 set cursorline
 hi Visual term=reverse cterm=reverse guibg=Grey
+
