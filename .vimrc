@@ -38,6 +38,8 @@ NeoBundle 'thinca/vim-quickrun'
 NeoBundle 'mattn/webapi-vim'
 NeoBundle 'tyru/open-browser.vim'
 NeoBundle 'superbrothers/vim-quickrun-markdown-gfm'
+NeoBundle 'tomtom/tcomment_vim'
+NeoBundle 'LeafCage/yankround.vim'
 
 NeoBundleCheck
 
@@ -88,6 +90,17 @@ nnoremap [prefix]mg :MemoGrep<CR>
 " Quickrun
 nnoremap [prefix]rm :QuickRun markdown<CR>
 
+" yankround
+nmap p <Plug>(yankround-p)
+xmap p <Plug>(yankround-p)
+nmap P <Plug>(yankround-P)
+nmap gp <Plug>(yankround-gp)
+xmap gp <Plug>(yankround-gp)
+nmap gP <Plug>(yankround-gP)
+nmap <C-p> <Plug>(yankround-prev)
+nmap <C-n> <Plug>(yankround-next)
+
+
 " parameters
 let g:memolist_path              = '~/memo'
 let g:memolist_memo_suffix       = 'txt'
@@ -109,6 +122,11 @@ let g:quickrun_config = {
 			\     'type': 'markdown/gfm',
 			\     'outputter': 'browser'
 			\   }
+			\ }
+
+" emmet
+let g:user_emmet_settings = {
+			\   'lang' : 'ja'
 			\ }
 
 syntax on
