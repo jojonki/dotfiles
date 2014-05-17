@@ -6,6 +6,12 @@
 "    |___|       |___|
 " ==================================================================================
 
+" OS {{{
+"====================================================================================================
+let s:is_win   = has('win32') || has('win64')
+let s:is_mac   = has('mac') || system('uname') =~? '^darwin'
+let s:is_linux = !s:is_mac && has('unix')
+" }}}
 
 filetype off
 
@@ -58,6 +64,32 @@ NeoBundle 'osyo-manga/vim-anzu'
 NeoBundle 'rhysd/clever-f.vim'
 NeoBundleCheck
 
+" JavaScript / TypeScript {{{
+" ---------------------------------------------------------------------------------------------------
+NeoBundleLazy 'myhere/vim-nodejs-complete'
+" NeoBundleLazy 'ahayman/vim-nodejs-complete'
+NeoBundleLazy 'moll/vim-node'
+NeoBundleLazy 'leafgarland/typescript-vim'
+NeoBundleLazy 'jiangmiao/simple-javascript-indenter'
+NeoBundleLazy 'hecomi/vim-javascript-syntax'
+NeoBundleLazy 'pangloss/vim-javascript'
+NeoBundleLazy 'thinca/vim-textobj-function-javascript'
+" NeoBundleLazy 'marijnh/tern_for_vim'
+augroup NeoBundleLazyForJavaScript
+  autocmd!
+  autocmd FileType html,javascript,typescript NeoBundleSource
+    \ vim-nodejs-complete
+    \ vim-node
+    \ jscomplete-vim
+    \ typescript-vim
+    \ simple-javascript-indenter
+    \ vim-javascript-syntax
+    \ vim-javascript
+    \ vim-textobj-function-javascript
+augroup END
+" NeoBundleLazyByFileTypes 'othree/javascript-libraries-syntax.vim', ['javascript', 'html']
+" }}}
+
 filetype on
 filetype plugin indent on
 
@@ -88,14 +120,86 @@ nnoremap [unite]o :Unite bookmark<CR>
 "nnoremap [unite]t :Unite tab<CR>
 
 " VimFiler
+let g:vimfiler_as_default_explorer  = 1
+let g:vimfiler_safe_mode_by_default = 0
+let g:vimfiler_sort_type            = 'TIME'
+let g:vimfiler_file_icon            = '-'
+let g:vimfiler_marked_file_icon     = '*'
+
 nnoremap [prefix]vf     :VimFiler<CR>
 nnoremap [prefix]vfe    :VimFilerExplorer<CR>
+augroup VimFilerCustomKeyBinding
+  autocmd!
+  autocmd FileType vimfiler nnoremap <buffer> K <C-u>
+  autocmd FileType vimfiler nnoremap <buffer> <C-j> :bn<CR>
+  autocmd FileType vimfiler nnoremap <buffer> <C-k> :bp<CR>
+augroup END
 
 " VimShell
 nnoremap [prefix]vs  	:VimShell<CR>
 nnoremap [prefix]vsi 	:VimShellInteractive<CR>
 nnoremap [prefix]vsc 	:VimShellCreate<CR>
 nnoremap [prefix]vsp 	:VimShellPop<CR>
+
+" NeoComplete
+" Disable AutoComplPop.
+let g:acp_enableAtStartup = 0
+let g:neocomplete#enable_at_startup = 1
+let g:neocomplete#enable_smart_case = 1
+let g:neocomplete#sources#syntax#min_keyword_length = 3
+let g:neocomplete#lock_buffer_name_pattern = '\*ku\*'
+
+" Define dictionary.
+let g:neocomplete#sources#dictionary#dictionaries = {
+    \ 'default' : '',
+    \ 'vimshell' : $HOME.'/.vimshell_hist',
+    \ 'scheme' : $HOME.'/.gosh_completions'
+        \ }
+
+" Define keyword.
+if !exists('g:neocomplete#keyword_patterns')
+    let g:neocomplete#keyword_patterns = {}
+endif
+let g:neocomplete#keyword_patterns['default'] = '\h\w*'
+
+" Plugin key-mappings.
+inoremap <expr><C-g>     neocomplete#undo_completion()
+inoremap <expr><C-l>     neocomplete#complete_common_string()
+
+" Recommended key-mappings.
+" <CR>: close popup and save indent.
+inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
+function! s:my_cr_function()
+  return neocomplete#close_popup() . "\<CR>"
+  " For no inserting <CR> key.
+  "return pumvisible() ? neocomplete#close_popup() : "\<CR>"
+endfunction
+" <TAB>: completion.
+inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
+" <C-h>, <BS>: close popup and delete backword char.
+inoremap <expr><C-h> neocomplete#smart_close_popup()."\<C-h>"
+inoremap <expr><BS> neocomplete#smart_close_popup()."\<C-h>"
+inoremap <expr><C-y>  neocomplete#close_popup()
+inoremap <expr><C-e>  neocomplete#cancel_popup()
+
+" Enable omni completion.
+autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
+autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
+autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
+autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
+autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
+
+" Enable heavy omni completion.
+if !exists('g:neocomplete#sources#omni#input_patterns')
+  let g:neocomplete#sources#omni#input_patterns = {}
+endif
+"let g:neocomplete#sources#omni#input_patterns.php = '[^. \t]->\h\w*\|\h\w*::'
+"let g:neocomplete#sources#omni#input_patterns.c = '[^.[:digit:] *\t]\%(\.\|->\)'
+"let g:neocomplete#sources#omni#input_patterns.cpp = '[^.[:digit:] *\t]\%(\.\|->\)\|\h\w*::'
+
+" For perlomni.vim setting.
+" https://github.com/c9s/perlomni.vim
+let g:neocomplete#sources#omni#input_patterns.perl = '\h\w*->\h\w*\|\h\w*::'
 
 " MemoList.vim 
 nnoremap [prefix]mn :set noimdisable<CR>:MemoNew<CR>
@@ -239,6 +343,16 @@ augroup end
 
 let g:SimpleJsIndenter_BriefMode = 1
 
+" Copy
+" "
+" ---------------------------------------------------------------------------------------------------
+nnoremap [prefix]sp  :set paste<CR>
+nnoremap [prefix]snp :set nopaste<CR>
+augroup SetNoPaste
+  autocmd!
+  autocmd InsertLeave * if &paste | set nopaste | endif
+augroup END
+nnoremap p :set paste<CR>p:set nopaste<CR>
 
 " View
 set number
