@@ -47,6 +47,10 @@ NeoBundle 'fuenor/qfixgrep'
 NeoBundle 'tpope/vim-surround'
 NeoBundle 'mattn/emmet-vim'
 NeoBundle 'thinca/vim-quickrun'
+NeoBundle "osyo-manga/unite-quickfix"
+NeoBundle "bling/vim-airline"
+NeoBundle "osyo-manga/vim-airline-inu"
+NeoBundle "osyo-manga/shabadou.vim"
 
 " vim-quickrun-markdown-gfm
 NeoBundle 'thinca/vim-quickrun'
@@ -62,31 +66,42 @@ NeoBundle 'kana/vim-arpeggio'
 
 NeoBundle 'osyo-manga/vim-anzu'
 NeoBundle 'rhysd/clever-f.vim'
+
+NeoBundle 'thinca/vim-splash'
 NeoBundleCheck
 
 " JavaScript / TypeScript {{{
 " ---------------------------------------------------------------------------------------------------
-NeoBundleLazy 'myhere/vim-nodejs-complete'
+" NeoBundleLazy 'teramako/jscomplete-vim'
+" NeoBundleLazy 'myhere/vim-nodejs-complete'
 " NeoBundleLazy 'ahayman/vim-nodejs-complete'
-NeoBundleLazy 'moll/vim-node'
-NeoBundleLazy 'leafgarland/typescript-vim'
-NeoBundleLazy 'jiangmiao/simple-javascript-indenter'
-NeoBundleLazy 'hecomi/vim-javascript-syntax'
-NeoBundleLazy 'pangloss/vim-javascript'
-NeoBundleLazy 'thinca/vim-textobj-function-javascript'
+" NeoBundleLazy 'moll/vim-node'
+" NeoBundleLazy 'leafgarland/typescript-vim'
+" NeoBundleLazy 'jiangmiao/simple-javascript-indenter'
+" NeoBundleLazy 'hecomi/vim-javascript-syntax'
+" NeoBundleLazy 'pangloss/vim-javascript'
+" NeoBundleLazy 'thinca/vim-textobj-function-javascript'
 " NeoBundleLazy 'marijnh/tern_for_vim'
-augroup NeoBundleLazyForJavaScript
-  autocmd!
-  autocmd FileType html,javascript,typescript NeoBundleSource
-    \ vim-nodejs-complete
-    \ vim-node
-    \ jscomplete-vim
-    \ typescript-vim
-    \ simple-javascript-indenter
-    \ vim-javascript-syntax
-    \ vim-javascript
-    \ vim-textobj-function-javascript
-augroup END
+" augroup NeoBundleLazyForJavaScript
+"   autocmd!
+"   autocmd FileType html,javascript,typescript NeoBundleSource
+"     \ vim-nodejs-complete
+"     \ vim-node
+"     \ jscomplete-vim
+"     \ typescript-vim
+"     \ simple-javascript-indenter
+"     \ vim-javascript-syntax
+"     \ vim-javascript
+"     \ vim-textobj-function-javascript
+" augroup END
+" autocmd FileType javascript setlocal omnifunc=nodejscomplete#CompleteJS
+" if !exists('g:neocomplcache_omni_functions')
+"   let g:neocomplcache_omni_functions = {}
+" endif
+" let g:neocomplcache_omni_functions.javascript = 'nodejscomplete#CompleteJS'
+"
+" let g:node_usejscomplete = 1
+
 " NeoBundleLazyByFileTypes 'othree/javascript-libraries-syntax.vim', ['javascript', 'html']
 " }}}
 
@@ -235,13 +250,6 @@ augroup MemoSetFileType
 	autocmd BufNewFile,BufRead *.txt set filetype=memo
 augroup END
 
-" vim-quickrun-markdown
-let g:quickrun_config = {
-			\   'markdown': {
-			\     'type': 'markdown/gfm',
-			\     'outputter': 'browser'
-			\   }
-			\ }
 
 " emmet
 let g:user_emmet_settings = {
@@ -304,7 +312,7 @@ nnoremap <Esc><Esc> :nohlsearch<CR>
 nmap n <Plug>(anzu-n-with-echo)
 nmap N <Plug>(anzu-N-with-echo)
 nmap * <Plug>(anzu-star-with-echo)N
-nmap # <Plug>(anzu-sharp-with-echo)N
+nmap # <Plug>(anzu-)sharp-with-echo)N
 
 " Easy Motion {{{
 "====================================================================================================
@@ -353,6 +361,44 @@ augroup SetNoPaste
   autocmd InsertLeave * if &paste | set nopaste | endif
 augroup END
 nnoremap p :set paste<CR>p:set nopaste<CR>
+
+let g:splash#path = expand('~/') . '/.vim/bundle/vim-splash/onigiri.txt'
+
+" Shabadou {{{
+" ---------------------------------------------------------------------------------------------------
+" " vim-quickrun-markdown
+" let g:quickrun_config = {
+" 			\   'markdown': {
+" 			\     'type': 'markdown/gfm',
+" 			\     'outputter': 'browser'
+" 			\   }
+" 			\ }
+"   \ }
+
+" let g:quickrun_config['_'] = {
+"   \ 'hook/echo/priority_exit'                      : 100,
+"   \ 'hook/echo/enable_output_exit'                 : 1,
+"   \ 'hook/close_unite_quickfix/enable_hook_loaded' : 1,
+"   \ 'hook/unite_quickfix/enable_failure'           : 1,
+"   \ 'hook/close_quickfix/enable_exit'              : 1,
+"   \ 'hook/close_buffer/enable_failure'             : 1,
+"   \ 'hook/close_buffer/enable_empty_data'          : 1,
+"   \ 'hook/echo/enable'                             : 1,
+"   \ 'hook/echo/output_success'                     : '俺はついに見つけた！コードの神髄を！！',
+"   \ 'hook/echo/output_failure'                     : '...動け、動け、動いてよ。今、動かなきゃ、今、やらなきゃ、みんな死んじゃうんだ。もうそんなのやなんだよ。だから、動いてよ。',
+"   \ 'hook/inu/enable'                              : 1,
+"   \ 'hook/inu/echo'                                : 0,
+"   \ 'hook/inu/wait'                                : 5,
+"   \ 'hook/time/enable'                             : 1,
+"   \ 'outputter'                                    : 'multi:buffer:quickfix',
+"   \ 'outputter/buffer/split'                       : ':botright 8sp',
+"   \ 'outputter/buffer/close_on_empty'              : 1,
+"   \ 'runner'                                       : 'vimproc',
+"   \ 'runner/vimproc/updatetime'                    : 40,
+"   \ }
+
+" hook/inu/echo : 0 で echo で出力しないようにする
+" }}}
 
 " View
 set number
