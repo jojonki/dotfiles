@@ -41,6 +41,12 @@ NeoBundle 'superbrothers/vim-quickrun-markdown-gfm'
 NeoBundle 'tomtom/tcomment_vim'
 NeoBundle 'LeafCage/yankround.vim'
 
+NeoBundle 'Lokaltog/vim-easymotion'
+NeoBundle 'h1mesuke/vim-alignta'
+NeoBundle 'kana/vim-arpeggio'
+
+NeoBundle 'osyo-manga/vim-anzu'
+NeoBundle 'rhysd/clever-f.vim'
 NeoBundleCheck
 
 filetype on
@@ -129,6 +135,76 @@ let g:user_emmet_settings = {
 			\   'lang' : 'ja'
 			\ }
 
+"clever-f {{{
+"====================================================================================================
+let g:clever_f_across_no_line    = 0
+let g:clever_f_ignore_case       = 1
+let g:clever_f_use_migemo        = 1
+let g:clever_f_fix_key_direction = 0
+let g:clever_f_show_prompt       = 1
+" }}}
+
+" anzu.vim {{{
+"====================================================================================================
+let g:anzu_status_format = 'search : %#WarningMsg#%p %#Keyword#(%i/%l)%#None# : status'
+" }}}
+
+" Arpeggio Key Mappings {{{
+"====================================================================================================
+if !exists('g:arpeggio_loaded')
+  let g:arpeggio_loaded = 1
+
+" Settings
+" ---------------------------------------------------------------------------------------------------
+call arpeggio#load()
+let g:arpeggio_timeoutlen = 50
+
+" Window
+" ---------------------------------------------------------------------------------------------------
+Arpeggio nnoremap wh <C-w>h
+Arpeggio nnoremap wj <C-w>j
+Arpeggio nnoremap wk <C-w>k
+Arpeggio nnoremap wl <C-w>l
+Arpeggio nnoremap wo <C-w>o
+Arpeggio nnoremap wc <C-w>c
+Arpeggio nnoremap wq <C-w>c
+Arpeggio nnoremap w8 <C-w>s<Plug>(anzu-star)N
+Arpeggio nnoremap w3 <C-w>s<Plug>(anzu-sharp)N
+
+" Split
+" ---------------------------------------------------------------------------------------------------
+Arpeggio nnoremap sh :vsp<CR>
+Arpeggio nnoremap sj :sp<CR><C-w>j
+Arpeggio nnoremap sk :sp<CR>
+Arpeggio nnoremap sl :vsp<CR><C-w>l
+
+" Easy Motion
+" ---------------------------------------------------------------------------------------------------
+Arpeggio nmap em _w
+Arpeggio nmap EM _b
+
+endif " if !exists('g:arpeggio_loaded')
+" }}}
+
+" Search
+nnoremap <Esc><Esc> :nohlsearch<CR>
+nmap n <Plug>(anzu-n-with-echo)
+nmap N <Plug>(anzu-N-with-echo)
+nmap * <Plug>(anzu-star-with-echo)N
+nmap # <Plug>(anzu-sharp-with-echo)N
+
+" Easy Motion {{{
+"====================================================================================================
+let s:EasyMotion_keys       = 'hjklasdgqwertyuiopzxcvbnm'
+let g:EasyMotion_leader_key = '_'
+let g:EasyMotion_grouping   = 1
+
+hi clear EasyMotionTarget
+hi clear EasyMotionShade
+hi EasyMotionTarget ctermbg=none ctermfg=12  guibg=NONE guifg=#aa0000
+hi EasyMotionShade  ctermbg=none ctermfg=232 guibg=NONE guifg=#222222
+" }}}
+
 syntax on
 set nocompatible
 
@@ -141,8 +217,9 @@ set foldcolumn=1
 
 " Indent
 " ---------------------------------------------------------------------------------------------------
-set noexpandtab
-set tabstop=4 shiftwidth=4 softtabstop=0
+" set noexpandtab
+set tabstop=2 shiftwidth=2 softtabstop=0
+set expandtab
 set autoindent smartindent
 
 augroup FileDependentIndentSettings
@@ -170,3 +247,4 @@ if exists('$ITERM_PROFILE')
 end
 
 set backspace=start,eol,indent
+set encoding=utf-8
