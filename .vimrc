@@ -66,6 +66,7 @@ NeoBundle 'osyo-manga/vim-anzu'
 NeoBundle 'rhysd/clever-f.vim'
 
 NeoBundle 'thinca/vim-splash'
+NeoBundle 'airblade/vim-gitgutter'
 NeoBundleCheck
 
 " JavaScript / TypeScript {{{
@@ -324,6 +325,10 @@ hi EasyMotionTarget ctermbg=none ctermfg=12  guibg=NONE guifg=#aa0000
 hi EasyMotionShade  ctermbg=none ctermfg=232 guibg=NONE guifg=#222222
 " }}}
 
+set laststatus=2
+scriptencoding utf-8
+set encoding=utf-8
+set guifont=Ricty\ 10
 
 syntax on
 set nocompatible
@@ -364,7 +369,7 @@ nnoremap p :set paste<CR>p:set nopaste<CR>
 let g:splash#path = expand('~/') . '/.vim/bundle/vim-splash/onigiri.txt'
 
 " ---------------------------------------------------------------------------------------------------
-" vim-quickrun-markdown
+" " vim-quickrun-markdown
 " let g:quickrun_config = {
 " 			\   'markdown': {
 " 			\     'type': 'markdown/gfm',
@@ -373,16 +378,10 @@ let g:splash#path = expand('~/') . '/.vim/bundle/vim-splash/onigiri.txt'
 " 			\ }
 "   \ }
 
-set laststatus=2
 let g:lightline = {
       \ 'colorscheme': 'wombat',
       \ 'component': {
       \   'readonly': '%{&readonly?"⭤":""}',
-      \   'modified': '%{&filetype=="help"?"":&modified?"+":&modifiable?"":"-"}'
-      \ },
-      \ 'component_visible_condition': {
-      \   'readonly': '(&filetype!="help"&& &readonly)',
-      \   'modified': '(&filetype!="help"&&(&modified||!&modifiable))'
       \ },
       \ 'separator': { 'left': '⮀', 'right': '⮂' },
       \ 'subseparator': { 'left': '⮁', 'right': '⮃' }
@@ -411,7 +410,25 @@ let g:quickrun_config['_'] = {
   \ 'runner/vimproc/updatetime'                    : 40,
   \ }
 
+" 前回のカーソルポジションで開く
+augroup vimrcEx
+  au BufRead * if line("'\"") > 0 && line("'\"") <= line("$") |
+  \ exe "normal g`\"" | endif
+augroup END
 
+
+" vim-gitgutter {{{
+"====================================================================================================
+let g:gitgutter_enabled         = 0
+let g:gitgutter_highlight_lines = 0
+let g:gitgutter_sign_added      = '+'
+let g:gitgutter_sign_modified   = '~'
+let g:gitgutter_sign_removed    = '-'
+
+nnoremap [prefix]gg :GitGutterToggle<CR>
+nnoremap [prefix]gn :GitGutterNextHunk<CR>
+nnoremap [prefix]gN :GitGutterPrevHunk<CR>
+" }}}
 
 " View
 set number
