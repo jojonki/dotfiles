@@ -48,8 +48,6 @@ NeoBundle 'tpope/vim-surround'
 NeoBundle 'mattn/emmet-vim'
 NeoBundle 'thinca/vim-quickrun'
 NeoBundle "osyo-manga/unite-quickfix"
-NeoBundle "bling/vim-airline"
-NeoBundle "osyo-manga/vim-airline-inu"
 NeoBundle "osyo-manga/shabadou.vim"
 
 " vim-quickrun-markdown-gfm
@@ -364,7 +362,6 @@ nnoremap p :set paste<CR>p:set nopaste<CR>
 
 let g:splash#path = expand('~/') . '/.vim/bundle/vim-splash/onigiri.txt'
 
-" Shabadou {{{
 " ---------------------------------------------------------------------------------------------------
 " " vim-quickrun-markdown
 " let g:quickrun_config = {
@@ -375,30 +372,38 @@ let g:splash#path = expand('~/') . '/.vim/bundle/vim-splash/onigiri.txt'
 " 			\ }
 "   \ }
 
-" let g:quickrun_config['_'] = {
-"   \ 'hook/echo/priority_exit'                      : 100,
-"   \ 'hook/echo/enable_output_exit'                 : 1,
-"   \ 'hook/close_unite_quickfix/enable_hook_loaded' : 1,
-"   \ 'hook/unite_quickfix/enable_failure'           : 1,
-"   \ 'hook/close_quickfix/enable_exit'              : 1,
-"   \ 'hook/close_buffer/enable_failure'             : 1,
-"   \ 'hook/close_buffer/enable_empty_data'          : 1,
-"   \ 'hook/echo/enable'                             : 1,
-"   \ 'hook/echo/output_success'                     : '俺はついに見つけた！コードの神髄を！！',
-"   \ 'hook/echo/output_failure'                     : '...動け、動け、動いてよ。今、動かなきゃ、今、やらなきゃ、みんな死んじゃうんだ。もうそんなのやなんだよ。だから、動いてよ。',
-"   \ 'hook/inu/enable'                              : 1,
-"   \ 'hook/inu/echo'                                : 0,
-"   \ 'hook/inu/wait'                                : 5,
-"   \ 'hook/time/enable'                             : 1,
-"   \ 'outputter'                                    : 'multi:buffer:quickfix',
-"   \ 'outputter/buffer/split'                       : ':botright 8sp',
-"   \ 'outputter/buffer/close_on_empty'              : 1,
-"   \ 'runner'                                       : 'vimproc',
-"   \ 'runner/vimproc/updatetime'                    : 40,
-"   \ }
+let g:quickrun_config = {}
+let g:quickrun_config['_'] = {
+  \ 'hook/echo/priority_exit'                      : 100,
+  \ 'hook/echo/enable_output_exit'                 : 1,
+  \ 'hook/close_unite_quickfix/enable_hook_loaded' : 1,
+  \ 'hook/unite_quickfix/enable_failure'           : 1,
+  \ 'hook/close_quickfix/enable_exit'              : 1,
+  \ 'hook/close_buffer/enable_failure'             : 1,
+  \ 'hook/close_buffer/enable_empty_data'          : 1,
+  \ 'hook/echo/enable'                             : 1,
+  \ 'hook/echo/output_success'                     : '俺はついに見つけた！コードの神髄を！！',
+  \ 'hook/echo/output_failure'                     : '...動け、動け、動いてよ。今、動かなきゃ、今、やらなきゃ、みんな死んじゃうんだ。もうそんなのやなんだよ。だから、動いてよ。',
+  \ 'hook/inu/enable'                              : 1,
+  \ 'hook/inu/echo'                                : 0,
+  \ 'hook/inu/wait'                                : 5,
+  \ 'hook/time/enable'                             : 1,
+  \ 'outputter'                                    : 'multi:buffer:quickfix',
+  \ 'outputter/buffer/split'                       : ':botright 8sp',
+  \ 'outputter/buffer/close_on_empty'              : 1,
+  \ 'runner'                                       : 'vimproc',
+  \ 'runner/vimproc/updatetime'                    : 40,
+  \ }
 
-" hook/inu/echo : 0 で echo で出力しないようにする
-" }}}
+
+let g:lightline = {
+    \ 'colorscheme': 'wombat',
+    \ 'component': {
+    \   'readonly': '%{&readonly?"⭤":""}',
+    \ },
+    \ 'separator': { 'left': '⮀', 'right': '⮂' },
+    \ 'subseparator': { 'left': '⮁', 'right': '⮃' }
+    \ }
 
 " View
 set number
