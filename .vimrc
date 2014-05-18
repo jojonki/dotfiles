@@ -15,14 +15,20 @@ let s:is_linux = !s:is_mac && has('unix')
 
 filetype off
 
+" Path {{{
 if has("vim_starting")
   set nocompatible
   set runtimepath+=~/.vim/bundle/neobundle.vim
 endif
 
 call neobundle#rc(expand('~/.vim/bundle/'))
-NeoBundleFetch 'Shougo/neobundle.vim'
+" }}}
 
+" Shougo-san's {{{ 
+NeoBundleFetch 'Shougo/neobundle.vim'
+NeoBundle 'Shougo/vimshell.vim'
+NeoBundle 'Shougo/vimfiler.vim'
+NeoBundle 'Shougo/unite.vim'
 NeoBundle 'Shougo/neocomplete.vim' 
 NeoBundle 'Shougo/unite.vim'
 NeoBundle 'Shougo/vimproc', {
@@ -33,40 +39,56 @@ NeoBundle 'Shougo/vimproc', {
 			\		'unix'    : 'make -f make_unix.mak',
 			\	},
 			\ }
-NeoBundle 'Shougo/vimshell.vim'
-NeoBundle 'Shougo/vimfiler.vim'
-NeoBundle 'itchyny/lightline.vim'
-NeoBundle 't9md/vim-textmanip'
+" }}}
 
-NeoBundle 'Shougo/unite.vim'
+
+" Visual style {{{
 NeoBundle 'ujihisa/unite-colorscheme'
-NeoBundle 'tomasr/molokai'
 NeoBundle 'altercation/vim-colors-solarized'
-NeoBundle 'glidenote/memolist.vim'
-NeoBundle 'fuenor/qfixgrep'
-NeoBundle 'tpope/vim-surround'
-NeoBundle 'mattn/emmet-vim'
-NeoBundle 'thinca/vim-quickrun'
-NeoBundle "osyo-manga/unite-quickfix"
-NeoBundle "osyo-manga/shabadou.vim"
-
-" vim-quickrun-markdown-gfm
-NeoBundle 'thinca/vim-quickrun'
-NeoBundle 'mattn/webapi-vim'
-NeoBundle 'tyru/open-browser.vim'
-NeoBundle 'superbrothers/vim-quickrun-markdown-gfm'
-NeoBundle 'tomtom/tcomment_vim'
-NeoBundle 'LeafCage/yankround.vim'
-
-NeoBundle 'Lokaltog/vim-easymotion'
-NeoBundle 'h1mesuke/vim-alignta'
-NeoBundle 'kana/vim-arpeggio'
-
+NeoBundle 'tomasr/molokai'
 NeoBundle 'osyo-manga/vim-anzu'
-NeoBundle 'rhysd/clever-f.vim'
+" }}}
 
-NeoBundle 'thinca/vim-splash'
+" Key operation enhancer {{{
+NeoBundle 'kana/vim-arpeggio'
+NeoBundle 'rhysd/clever-f.vim'
+NeoBundle 'tpope/vim-surround'
+NeoBundle 'Lokaltog/vim-easymotion'
+" }}}
+
+" Common {{{
+NeoBundle 'itchyny/lightline.vim'
+NeoBundle 'LeafCage/yankround.vim'
+NeoBundle 't9md/vim-textmanip'
+" }}}
+
+" Programming (Common) {{{
+NeoBundle 'thinca/vim-quickrun'
 NeoBundle 'airblade/vim-gitgutter'
+NeoBundle "osyo-manga/unite-quickfix"
+NeoBundle 'tomtom/tcomment_vim'
+NeoBundle 'fuenor/qfixgrep'
+" }}}
+
+" HTML {{{
+NeoBundle 'mattn/emmet-vim'
+" }}}
+
+
+NeoBundle 'h1mesuke/vim-alignta'
+
+" Neta {{{
+NeoBundle 'thinca/vim-splash'
+NeoBundle "osyo-manga/shabadou.vim"
+" }}}
+
+" Others {{{
+NeoBundle 'glidenote/memolist.vim'
+NeoBundle 'tyru/open-browser.vim'
+" vim-quickrun-markdown-gfm
+" NeoBundle 'superbrothers/vim-quickrun-markdown-gfm'
+" }}}
+
 NeoBundleCheck
 
 " JavaScript / TypeScript {{{
@@ -428,6 +450,13 @@ let g:gitgutter_sign_removed    = '-'
 nnoremap [prefix]gg :GitGutterToggle<CR>
 nnoremap [prefix]gn :GitGutterNextHunk<CR>
 nnoremap [prefix]gN :GitGutterPrevHunk<CR>
+" }}}
+
+" Textmanip {{{
+vmap <C-j> <Plug>(textmanip-move-down)
+vmap <C-k> <Plug>(textmanip-move-up)
+vmap <C-h> <Plug>(textmanip-move-left)
+vmap <C-l> <Plug>(textmanip-move-right)
 " }}}
 
 " View
