@@ -324,6 +324,11 @@ hi EasyMotionTarget ctermbg=none ctermfg=12  guibg=NONE guifg=#aa0000
 hi EasyMotionShade  ctermbg=none ctermfg=232 guibg=NONE guifg=#222222
 " }}}
 
+set laststatus=2
+scriptencoding utf-8
+set encoding=utf-8
+set guifont=Ricty\ 10
+
 syntax on
 set nocompatible
 
@@ -372,6 +377,15 @@ let g:splash#path = expand('~/') . '/.vim/bundle/vim-splash/onigiri.txt'
 " 			\ }
 "   \ }
 
+let g:lightline = {
+      \ 'colorscheme': 'wombat',
+      \ 'component': {
+      \   'readonly': '%{&readonly?"x":""}',
+      \ },
+      \ 'separator': { 'left': "\u2b80", 'right': "\u2b82" },
+      \ 'subseparator': { 'left': "\u2b81", 'right': "\u2b83" }
+      \ }
+
 let g:quickrun_config = {}
 let g:quickrun_config['_'] = {
   \ 'hook/echo/priority_exit'                      : 100,
@@ -396,14 +410,6 @@ let g:quickrun_config['_'] = {
   \ }
 
 
-let g:lightline = {
-    \ 'colorscheme': 'wombat',
-    \ 'component': {
-    \   'readonly': '%{&readonly?"⭤":""}',
-    \ },
-    \ 'separator': { 'left': '⮀', 'right': '⮂' },
-    \ 'subseparator': { 'left': '⮁', 'right': '⮃' }
-    \ }
 
 " View
 set number
@@ -414,11 +420,6 @@ colorscheme molokai
 set cursorline
 hi Visual term=reverse cterm=reverse guibg=Grey
 
-" iterm cursor
-if exists('$ITERM_PROFILE')
-	let &t_SI = "\<Esc>]50;CursorShape=1\x7"
-	let &t_EI = "\<Esc>]50;CursorShape=0\x7"
-end
 
 set backspace=start,eol,indent
 set encoding=utf-8
