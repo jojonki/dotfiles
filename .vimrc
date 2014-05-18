@@ -91,41 +91,6 @@ filetype plugin on
 filetype indent on
 " }}}
 
-" JavaScript / TypeScript {{{
-" ---------------------------------------------------------------------------------------------------
-" NeoBundleLazy 'teramako/jscomplete-vim'
-" NeoBundleLazy 'myhere/vim-nodejs-complete'
-" NeoBundleLazy 'ahayman/vim-nodejs-complete'
-" NeoBundleLazy 'moll/vim-node'
-" NeoBundleLazy 'leafgarland/typescript-vim'
-" NeoBundleLazy 'jiangmiao/simple-javascript-indenter'
-" NeoBundleLazy 'hecomi/vim-javascript-syntax'
-" NeoBundleLazy 'pangloss/vim-javascript'
-" NeoBundleLazy 'thinca/vim-textobj-function-javascript'
-" NeoBundleLazy 'marijnh/tern_for_vim'
-" augroup NeoBundleLazyForJavaScript
-"   autocmd!
-"   autocmd FileType html,javascript,typescript NeoBundleSource
-"     \ vim-nodejs-complete
-"     \ vim-node
-"     \ jscomplete-vim
-"     \ typescript-vim
-"     \ simple-javascript-indenter
-"     \ vim-javascript-syntax
-"     \ vim-javascript
-"     \ vim-textobj-function-javascript
-" augroup END
-" autocmd FileType javascript setlocal omnifunc=nodejscomplete#CompleteJS
-" if !exists('g:neocomplcache_omni_functions')
-"   let g:neocomplcache_omni_functions = {}
-" endif
-" let g:neocomplcache_omni_functions.javascript = 'nodejscomplete#CompleteJS'
-"
-" let g:node_usejscomplete = 1
-
-" NeoBundleLazyByFileTypes 'othree/javascript-libraries-syntax.vim', ['javascript', 'html']
-" }}}
-
 " Common Key Mappings {{{
 nnoremap [prefix] <nop>
 nmap ,   [prefix]
@@ -232,11 +197,13 @@ inoremap <expr><C-y>  neocomplete#close_popup()
 inoremap <expr><C-e>  neocomplete#cancel_popup()
 
 " Enable omni completion.
-autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
-autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
-autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
-autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
-autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
+augroup OmniFiletype
+  autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
+  autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
+  autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
+  autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
+  autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
+augroup END
 
 " Enable heavy omni completion.
 if !exists('g:neocomplete#sources#omni#input_patterns')
