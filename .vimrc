@@ -324,10 +324,6 @@ hi EasyMotionTarget ctermbg=none ctermfg=12  guibg=NONE guifg=#aa0000
 hi EasyMotionShade  ctermbg=none ctermfg=232 guibg=NONE guifg=#222222
 " }}}
 
-set laststatus=2
-scriptencoding utf-8
-set encoding=utf-8
-set guifont=Ricty\ 10
 
 syntax on
 set nocompatible
@@ -368,7 +364,7 @@ nnoremap p :set paste<CR>p:set nopaste<CR>
 let g:splash#path = expand('~/') . '/.vim/bundle/vim-splash/onigiri.txt'
 
 " ---------------------------------------------------------------------------------------------------
-" " vim-quickrun-markdown
+" vim-quickrun-markdown
 " let g:quickrun_config = {
 " 			\   'markdown': {
 " 			\     'type': 'markdown/gfm',
@@ -377,10 +373,16 @@ let g:splash#path = expand('~/') . '/.vim/bundle/vim-splash/onigiri.txt'
 " 			\ }
 "   \ }
 
+set laststatus=2
 let g:lightline = {
       \ 'colorscheme': 'wombat',
       \ 'component': {
       \   'readonly': '%{&readonly?"⭤":""}',
+      \   'modified': '%{&filetype=="help"?"":&modified?"+":&modifiable?"":"-"}'
+      \ },
+      \ 'component_visible_condition': {
+      \   'readonly': '(&filetype!="help"&& &readonly)',
+      \   'modified': '(&filetype!="help"&&(&modified||!&modifiable))'
       \ },
       \ 'separator': { 'left': '⮀', 'right': '⮂' },
       \ 'subseparator': { 'left': '⮁', 'right': '⮃' }
