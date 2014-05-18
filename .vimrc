@@ -108,6 +108,26 @@ nnoremap L $
 vnoremap H ^
 vnoremap L $
 
+" Buffer
+nnoremap <C-j> :bn<CR>
+nnoremap <C-k> :bp<CR>
+
+" Tab
+nnoremap <TAB>   :tabn<CR>
+nnoremap <S-TAB> :tabp<CR>
+nnoremap <C-TAB> :tabnew<CR>
+
+" alternative
+nnoremap <C-t>   :tabnew<CR>
+nnoremap <C-l>   :tabn<CR>
+nnoremap <C-h>   :tabp<CR>
+
+" Window
+" ---------------------------------------------------------------------------------------------------
+nnoremap <Right> <C-w><
+nnoremap <Left>  <C-w>>
+nnoremap <Up>    <C-w>-
+
 " }}}
 
 " Unite.vim {{{
