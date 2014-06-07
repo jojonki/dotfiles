@@ -70,6 +70,7 @@ NeoBundle 'fuenor/qfixgrep'
 
 " HTML {{{
 NeoBundle 'mattn/emmet-vim'
+NeoBundle 'groenewege/vim-less'
 " }}}
 
 " Neta {{{
@@ -423,6 +424,30 @@ vmap <C-h> <Plug>(textmanip-move-left)
 vmap <C-l> <Plug>(textmanip-move-right)
 " }}}
 
+" Alignta {{{
+nnoremap [unite]a :<C-u>Unite alignta:options<CR>
+xnoremap [unite]a :<C-u>Unite alignta:arguments<CR>
+
+let g:unite_source_alignta_preset_arguments = [
+  \ ["Align at '='", '=>\='],
+  \ ["Align at ':'", '01 :'],
+  \ ["Align at ':'", '11 :'],
+  \ ["Align at ':'", '01 :/1'],
+  \ ["Align at ':'", '11 :/1'],
+  \ ["Align at '|'", '|'   ],
+  \ ["Align at ')'", '0 )' ],
+  \ ["Align at ']'", '0 ]' ],
+  \ ["Align at '}'", '}'   ],
+\]
+
+vnoremap a  :Alignta
+vnoremap a= :Alignta =<CR>
+vnoremap a+ :Alignta +<CR>
+vnoremap a: :Alignta 11 :/1<CR>
+vnoremap a; :Alignta 11 :/1<CR>
+vnoremap a, :Alignta 01 ,<CR>
+" }}}
+
 " Common Settings {{{
 " 前回のカーソルポジションで開く
 augroup vimrcEx
@@ -433,17 +458,22 @@ augroup END
 let g:splash#path = expand('~/') . '/.vim/bundle/vim-splash/onigiri.txt'
 
 set laststatus=2
-scriptencoding utf-8
-set encoding=utf-8
 set guifont=Ricty\ 10
 set backspace=start,eol,indent
-set encoding=utf-8
 
-" View
+set encoding=utf-8
+scriptencoding utf-8
+set termencoding=utf-8
+set fileencodings=utf-8,iso-2022-jp,euc-jp,cp932,ucs-bom,default,latin1
+set fileformats=unix,dos,mac
+if exists('&ambiwidth')
+  set ambiwidth=double
+endif
+
 set number
 colorscheme molokai
 set cursorline
-hi Visual term=reverse cterm=reverse guibg=Grey
+hi Visual term=reverse cterm=reverse guibg=Blue
 
 syntax on
 set nocompatible
