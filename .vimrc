@@ -258,7 +258,6 @@ augroup MemoSetFileType
 augroup END
 " }}}
 
-
 " Alignta {{{
 nnoremap [unite]a :<C-u>Unite alignta:options<CR>
 xnoremap [unite]a :<C-u>Unite alignta:arguments<CR>
