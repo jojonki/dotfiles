@@ -124,7 +124,6 @@ nnoremap <C-l>   :tabn<CR>
 nnoremap <C-h>   :tabp<CR>
 
 " Window
-" ---------------------------------------------------------------------------------------------------
 nnoremap <Right> <C-w><
 nnoremap <Left>  <C-w>>
 nnoremap <Up>    <C-w>-
@@ -257,6 +256,37 @@ augroup MemoSetFileType
 	autocmd!
 	autocmd BufNewFile,BufRead *.txt set filetype=memo
 augroup END
+" }}}
+
+
+" Alignta {{{
+nnoremap [unite]a :<C-u>Unite alignta:options<CR>
+xnoremap [unite]a :<C-u>Unite alignta:arguments<CR>
+
+let g:unite_source_alignta_preset_arguments = [
+      \ ["Align at '='", '=>\='],
+      \ ["Align at ':'", '01 :'],
+      \ ["Align at ':'", '11 :'],
+      \ ["Align at ':'", '01 :/1'],
+      \ ["Align at ':'", '11 :/1'],
+      \ ["Align at '|'", '|'   ],
+      \ ["Align at ')'", '0 )' ],
+      \ ["Align at ']'", '0 ]' ],
+      \ ["Align at '}'", '}'   ],
+      \]
+
+vnoremap a  :Alignta
+vnoremap a= :Alignta =<CR>
+vnoremap a+ :Alignta +<CR>
+vnoremap a: :Alignta 11 :/1<CR>
+vnoremap a; :Alignta 11 :/1<CR>
+vnoremap a, :Alignta 01 ,<CR>
+vnoremap as :Alignta <<0 \s\s*<CR>
+vnoremap ae :Alignta -e
+vnoremap ar :Alignta -r
+vnoremap ap :Alignta -p
+vnoremap ag :Alignta g/^\s*
+vnoremap av :Alignta v/^\s*
 " }}}
 
 " Quickrun {{{
