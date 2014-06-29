@@ -290,6 +290,7 @@ vnoremap av :Alignta v/^\s*
 
 " Quickrun {{{
 nnoremap [prefix]rm :QuickRun markdown<CR>
+nnoremap [prefix]r :QuickRun<CR>
 
 let g:quickrun_config = {}
 let g:quickrun_config['_'] = {
