@@ -39,6 +39,14 @@ NeoBundle 'Shougo/vimproc', {
 			\ }
 " }}}
 
+" Benchmark {{{
+NeoBundleLazy 'mattn/benchvimrc-vim', {
+      \ 'autoload': {
+      \   'commands': ['BenchVimrc'],
+      \  },
+      \}
+" }}}
+
 " Visual style {{{
 NeoBundle 'ujihisa/unite-colorscheme'
 NeoBundle 'altercation/vim-colors-solarized'
@@ -58,6 +66,7 @@ NeoBundle 'christoomey/vim-tmux-navigator'
 " Common {{{
 NeoBundle 'itchyny/lightline.vim'
 NeoBundle 'LeafCage/yankround.vim'
+NeoBundle 'kien/ctrlp.vim'
 NeoBundle 't9md/vim-textmanip'
 " }}}
 
@@ -318,17 +327,6 @@ let g:quickrun_config['_'] = {
   \ }
 " }}}
 
-" yankround {{{
-nmap p <Plug>(yankround-p)
-xmap p <Plug>(yankround-p)
-nmap P <Plug>(yankround-P)
-nmap gp <Plug>(yankround-gp)
-xmap gp <Plug>(yankround-gp)
-nmap gP <Plug>(yankround-gP)
-nmap <C-p> <Plug>(yankround-prev)
-nmap <C-n> <Plug>(yankround-next)
-" }}}
-
 " emmet {{{
 let g:user_emmet_settings = {
 			\   'lang' : 'ja'
@@ -480,32 +478,53 @@ vnoremap a; :Alignta 11 :/1<CR>
 vnoremap a, :Alignta 01 ,<CR>
 " }}}
 
-" tmux {{{
-if exists('$TMUX')
-  function! TmuxOrSplitSwitch(wincmd, tmuxdir)
-    let previous_winnr = winnr()
-    silent! execute "wincmd " . a:wincmd
-    if previous_winnr == winnr()
-      call system("tmux select-pane -" . a:tmuxdir)
-      redraw!
-    endif
-  endfunction
-
-  let previous_title = substitute(system("tmux display-message -p '#{pane_title}'"), '\n', '', '')
-  let &t_ti = "\<Esc>]2;vim\<Esc>\\" . &t_ti
-  let &t_te = "\<Esc>]2;". previous_title . "\<Esc>\\" . &t_te
-
-  nnoremap <silent> <C-h> :call TmuxOrSplitSwitch('h', 'L')<cr>
-  nnoremap <silent> <C-j> :call TmuxOrSplitSwitch('j', 'D')<cr>
-  nnoremap <silent> <C-k> :call TmuxOrSplitSwitch('k', 'U')<cr>
-  nnoremap <silent> <C-l> :call TmuxOrSplitSwitch('l', 'R')<cr>
-else
-  map <C-h> <C-w>h
-  map <C-j> <C-w>j
-  map <C-k> <C-w>k
-  map <C-l> <C-w>l
-endif
+" yankround {{{
+nmap p <Plug>(yankround-p)
+xmap p <Plug>(yankround-p)
+nmap P <Plug>(yankround-P)
+nmap gp <Plug>(yankround-gp)
+xmap gp <Plug>(yankround-gp)
+nmap gP <Plug>(yankround-gP)
+nmap <C-p> <Plug>(yankround-prev)
+nmap <C-n> <Plug>(yankround-next)
 " }}}
+
+" ctrlp {{{
+let g:ctrlp_map = '<C-f>'
+let g:ctrlp_prompt_mappings = {
+  \ 'PrtBS()':              ['<bs>'],
+  \ 'PrtDeleteWord()':      ['<del>'],
+  \ 'PrtCurEnd()':          ['<nop>'],
+  \ 'PrtCurLeft()':         ['<nop>'],
+  \ 'PrtCurRight()':        ['<nop>'],
+  \ 'PrtHistory(-1)':       ['<nop>'],
+  \ 'PrtHistory(1)':        ['<nop>'],
+  \ 'PrtInsert()':          ['<nop>'],
+  \ 'PrtCurStart()':        ['<nop>'],
+  \ 'PrtClearCache()':      ['<nop>'],
+  \ 'PrtDeleteEnt()':       ['<nop>'],
+  \ 'PrtClear()':           ['<c-d>'],
+  \ 'PrtExit()':            ['<nop>', '<esc>', '<c-c>'],
+  \ 'PrtExpandDir()':       ['<tab>'],
+  \ 'PrtDelete()':          ['<nop>'],
+  \ 'PrtSelectMove("t")':   ['<nop>'],
+  \ 'PrtSelectMove("b")':   ['<nop>'],
+  \ 'PrtSelectMove("u")':   ['<nop>'],
+  \ 'PrtSelectMove("d")':   ['<nop>'],
+  \ 'ToggleRegex()':        ['<nop>'],
+  \ 'ToggleByFname()':      ['<nop>'],
+  \ 'ToggleFocus()':        ['<nop>'],
+  \ 'ToggleType(1)':        ['<nop>'],
+  \ 'ToggleType(-1)':       ['<nop>'],
+  \ 'AcceptSelection("e")': ['<cr>'], 
+  \ 'AcceptSelection("h")': ['<nop>'], 
+  \ 'AcceptSelection("t")': ['<nop>'],
+  \ 'AcceptSelection("v")': ['<nop>'],
+  \ 'CreateNewFile()':      ['<nop>'],
+  \ 'MarkToOpen()':         ['<nop>'],
+  \ 'OpenMulti()':          ['<nop>'],
+  \ }
+"" }}}
 
 " Common Settings {{{
 " 前回のカーソルポジションで開く
