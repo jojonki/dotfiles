@@ -60,7 +60,7 @@ NeoBundle 'rhysd/clever-f.vim'
 NeoBundle 'tpope/vim-surround'
 NeoBundle 'Lokaltog/vim-easymotion'
 NeoBundle 'h1mesuke/vim-alignta'
-NeoBundle 'christoomey/vim-tmux-navigator'
+" NeoBundle 'christoomey/vim-tmux-navigator'
 " }}}
 
 " Common {{{
@@ -151,15 +151,37 @@ xmap <Space> [unite]
 nnoremap [unite]  :Unite
 nnoremap [unite]b :Unite buffer<CR>
 nnoremap [unite]o :Unite bookmark<CR>
-"nnoremap [unite]f :Unite find<CR>
-"nnoremap [unite]g :Unite grep<CR>
-"nnoremap [unite]k :Unite fhc<CR>
-"nnoremap [unite]l :Unite line<CR>
-"nnoremap [unite]m :Unite menu<CR>
-"nnoremap [unite]o :Unite outline<CR>
-"nnoremap [unite]s :Unite snippet<CR>
-"nnoremap [unite]t :Unite tab<CR>
+nnoremap [unite]f :Unite find<CR>
+nnoremap [unite]g :Unite grep<CR>
+nnoremap [unite]k :Unite fhc<CR>
+nnoremap [unite]l :Unite line<CR>
+nnoremap [unite]m :Unite menu<CR>
+nnoremap [unite]o :Unite outline<CR>
+nnoremap [unite]s :Unite snippet<CR>
+nnoremap [unite]t :Unite tab<CR>
 
+" insert modeで開始
+let g:unite_enable_start_insert = 1
+
+" 大文字小文字を区別しない
+let g:unite_enable_ignore_case = 1
+let g:unite_enable_smart_case = 1
+
+" grep検索
+nnoremap <silent> ,g  :<C-u>Unite grep:. -buffer-name=search-buffer<CR>
+
+" カーソル位置の単語をgrep検索
+"nnoremap <silent> ,cg :<C-u>Unite grep:. -buffer-name=search-buffer<CR><C-R><C-W>
+
+" grep検索結果の再呼出
+nnoremap <silent> ,r  :<C-u>UniteResume search-buffer<CR>
+
+" unite grep に ag(The Silver Searcher) を使う
+if executable('ag')
+  let g:unite_source_grep_command = 'ag'
+  let g:unite_source_grep_default_opts = '--nogroup --nocolor --column'
+  let g:unite_source_grep_recursive_opt = ''
+endif
 " }}}
 
 " VimFiler {{{
@@ -491,6 +513,8 @@ nmap <C-n> <Plug>(yankround-next)
 
 " ctrlp {{{
 let g:ctrlp_map = '<C-f>'
+let g:ctrlp_working_path_mode = ""
+let g:ctrlp_max_files=0
 let g:ctrlp_prompt_mappings = {
   \ 'PrtBS()':              ['<bs>'],
   \ 'PrtDeleteWord()':      ['<del>'],
@@ -501,7 +525,7 @@ let g:ctrlp_prompt_mappings = {
   \ 'PrtHistory(1)':        ['<nop>'],
   \ 'PrtInsert()':          ['<nop>'],
   \ 'PrtCurStart()':        ['<nop>'],
-  \ 'PrtClearCache()':      ['<nop>'],
+  \ 'PrtClearCache()':      ['<c-r>'],
   \ 'PrtDeleteEnt()':       ['<nop>'],
   \ 'PrtClear()':           ['<c-d>'],
   \ 'PrtExit()':            ['<nop>', '<esc>', '<c-c>'],
@@ -511,7 +535,7 @@ let g:ctrlp_prompt_mappings = {
   \ 'PrtSelectMove("b")':   ['<nop>'],
   \ 'PrtSelectMove("u")':   ['<nop>'],
   \ 'PrtSelectMove("d")':   ['<nop>'],
-  \ 'ToggleRegex()':        ['<nop>'],
+  \ 'ToggleRegex()':        ['<F5>'],
   \ 'ToggleByFname()':      ['<nop>'],
   \ 'ToggleFocus()':        ['<nop>'],
   \ 'ToggleType(1)':        ['<nop>'],
