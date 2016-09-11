@@ -550,6 +550,22 @@ let g:ctrlp_prompt_mappings = {
   \ }
 "" }}}
 
+" html {{{
+NeoBundle 'nikvdp/ejs-syntax'
+autocmd BufNewFile,BufRead *.ejs set filetype=ejs
+autocmd BufNewFile,BufRead *._ejs set filetype=ejs
+
+function! s:DetectEjs()
+  if getline(1) =~ '^#!.*\<ejs\>'
+    set filetype=ejs
+  endif
+endfunction
+
+autocmd BufNewFile,BufRead * call s:DetectEjs()
+
+au BufNewFile,BufRead *.tag set filetype=html
+" end ctrlp }}}
+
 " Common Settings {{{
 " 前回のカーソルポジションで開く
 augroup vimrcEx
