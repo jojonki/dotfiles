@@ -515,6 +515,7 @@ nmap <C-n> <Plug>(yankround-next)
 let g:ctrlp_map = '<C-f>'
 let g:ctrlp_working_path_mode = ""
 let g:ctrlp_max_files=0
+let g:ctrlp_custom_ignore = '\v[\/]\.?(git|hg|svn|node_modules|bower_components)$'
 let g:ctrlp_prompt_mappings = {
   \ 'PrtBS()':              ['<bs>'],
   \ 'PrtDeleteWord()':      ['<del>'],
