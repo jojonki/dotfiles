@@ -81,6 +81,7 @@ NeoBundle 'fuenor/qfixgrep'
 " HTML {{{
 NeoBundle 'mattn/emmet-vim'
 NeoBundle 'groenewege/vim-less'
+NeoBundle 'nikvdp/ejs-syntax'
 " }}}
 
 " Neta {{{
@@ -552,7 +553,6 @@ let g:ctrlp_prompt_mappings = {
 "" }}}
 
 " html {{{
-NeoBundle 'nikvdp/ejs-syntax'
 autocmd BufNewFile,BufRead *.ejs set filetype=ejs
 autocmd BufNewFile,BufRead *._ejs set filetype=ejs
 
