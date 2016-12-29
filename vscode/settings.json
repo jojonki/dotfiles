@@ -1,0 +1,32 @@
+{
+  "vim.insertModeKeyBindings": [
+    {
+      "before": ["j", "j"],
+      "after": ["ctrl", "t"]
+    }
+  ],
+  "vim.otherModesKeyBindingsNonRecursive": [
+    {
+      "before": ["J"],
+      "after": ["j", "j", "j", "j", "j", "j", "j", "j", "j", "j"]
+    },
+    {
+      "before": ["K"],
+      "after": ["k", "k", "k", "k", "k", "k", "k", "k", "k", "k"]
+    },
+    {
+      "before": ["L"],
+      "after": ["$"]
+    },
+    {
+      "before": ["H"],
+      "after": ["^"]
+    }
+  ]
+  ,
+  "vim.searchHighlightColor": "rgba(25, 50, 255, 0.3)",
+  "python.linting.pylintEnabled": true,
+  "python.linting.pylintArgs": [
+    "--extension-pkg-whitelist=numpy"
+    ]
+}
