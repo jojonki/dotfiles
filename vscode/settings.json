@@ -25,6 +25,12 @@
   ]
   ,
   "vim.searchHighlightColor": "rgba(25, 50, 255, 0.3)",
+  "vim.handleKeys": {
+    "<C-f>": false,
+    "<C-a>": false,
+    "<C-c>": false,
+    "<C-w>": false
+  },
   "python.linting.pylintEnabled": true,
   "python.linting.pylintArgs": [
     "--extension-pkg-whitelist=numpy"
