@@ -1,0 +1,174 @@
+[[plugins]]
+repo = 'Shougo/dein.vim'
+
+[[plugins]]
+repo = 'Shougo/denite.nvim'
+
+
+# Common
+[[plugins]]
+repo = 'itchyny/lightline.vim'
+hook_add = '''
+  let g:lightline = {
+    \ 'colorscheme': 'powerline',
+    \ 'component': {
+      \   'readonly': '%{&readonly?"⭤":""}',
+      \ },
+    \ 'separator': { 'left': '⮀', 'right': '⮂' },
+    \ 'subseparator': { 'left': '⮁', 'right': '⮃' }
+    \ }
+''' 
+
+[[plugins]]
+repo = 'LeafCage/yankround.vim'
+
+[[plugins]]
+repo = 'kien/ctrlp.vim'
+
+[[plugins]]
+repo = 't9md/vim-textmanip'
+hook_add = '''
+  vmap <C-j> <Plug>(textmanip-move-down)
+  vmap <C-k> <Plug>(textmanip-move-up)
+  vmap <C-h> <Plug>(textmanip-move-left)
+  vmap <C-l> <Plug>(textmanip-move-right)
+'''
+
+# Visual Style
+[[plugins]]
+repo = 'tomasr/molokai'
+
+[[plugins]]
+repo = 'osyo-manga/vim-anzu'
+hook_add = '''
+  let g:anzu_status_format = 'search : %#WarningMsg#%p %#Keyword#(%i/%l)%#None# : status'
+  nnoremap <Esc><Esc> :nohlsearch<CR>
+  nmap n <Plug>(anzu-n-with-echo)
+  nmap N <Plug>(anzu-N-with-echo)
+  nmap * <Plug>(anzu-star-with-echo)N
+  nmap # <Plug>(anzu-)sharp-with-echo)N
+'''
+
+# Key operation enhancer
+[[plugins]]
+repo = 'kana/vim-arpeggio'
+hook_add = '''
+  if !exists('g:arpeggio_loaded')
+    let g:arpeggio_loaded = 1
+  
+  " Settings
+  call arpeggio#load()
+    let g:arpeggio_timeoutlen = 50
+    
+    " Window
+    " TODO
+    Arpeggio nnoremap wh <C-w>h
+    Arpeggio nnoremap wj <C-w>j
+    Arpeggio nnoremap wk <C-w>k
+    Arpeggio nnoremap wl <C-w>l
+    Arpeggio nnoremap wo <C-w>o
+    Arpeggio nnoremap wc <C-w>c
+    Arpeggio nnoremap wq <C-w>c
+    Arpeggio nnoremap w8 <C-w>s<Plug>(anzu-star)N
+    Arpeggio nnoremap w3 <C-w>s<Plug>(anzu-sharp)N
+    
+    " Split
+    Arpeggio nnoremap sh :vsp<CR>
+    Arpeggio nnoremap sj :sp<CR><C-w>j
+    Arpeggio nnoremap sk :sp<CR>
+    Arpeggio nnoremap sl :vsp<CR><C-w>l
+    
+    " Easy Motion
+    Arpeggio nmap em _w
+    Arpeggio nmap EM _b
+  
+  endif
+'''
+
+[[plugins]]
+repo = 'rhysd/clever-f.vim'
+hook_source = '''
+  let g:clever_f_across_no_line    = 0
+  let g:clever_f_ignore_case       = 1
+  let g:clever_f_use_migemo        = 1
+  let g:clever_f_fix_key_direction = 0
+  let g:clever_f_show_prompt       = 1
+'''
+
+# repo = 'tpope/vim-surround'
+
+[[plugins]]
+repo = 'Lokaltog/vim-easymotion'
+hook_add = '''
+  let s:EasyMotion_keys       = 'hjklasdgqwertyuiopzxcvbnm'
+  let g:EasyMotion_leader_key = '_'
+  let g:EasyMotion_grouping   = 1
+  
+  hi clear EasyMotionTarget
+  hi clear EasyMotionShade
+  hi EasyMotionTarget ctermbg=none ctermfg=12  guibg=NONE guifg=#aa0000
+  hi EasyMotionShade  ctermbg=none ctermfg=232 guibg=NONE guifg=#222222
+'''
+
+[[plugins]]
+repo = 'h1mesuke/vim-alignta'
+hook_add = '''
+	nnoremap [unite]a :<C-u>Unite alignta:options<CR>
+	xnoremap [unite]a :<C-u>Unite alignta:arguments<CR>
+
+	let g:unite_source_alignta_preset_arguments = [
+		\ ["Align at '='", '=>\='],
+		\ ["Align at ':'", '01 :'],
+		\ ["Align at ':'", '11 :'],
+		\ ["Align at ':'", '01 :/1'],
+		\ ["Align at ':'", '11 :/1'],
+		\ ["Align at '|'", '|'   ],
+		\ ["Align at ')'", '0 )' ],
+		\ ["Align at ']'", '0 ]' ],
+		\ ["Align at '}'", '}'   ],
+	\]
+
+	vnoremap a  :Alignta
+	vnoremap a= :Alignta =<CR>
+	vnoremap a+ :Alignta +<CR>
+	vnoremap a: :Alignta 11 :/1<CR>
+	vnoremap a; :Alignta 11 :/1<CR>
+	vnoremap a, :Alignta 01 ,<CR>
+'''
+
+
+
+# # git clone 後、実行すべきコマンドがある場合はこんな感じ
+# [[plugins]]
+# repo = 'Shougo/vimproc.vim'
+# hook_post_update = '''
+#   if dein#util#_is_windows()
+#     let cmd = 'tools\\update-dll-mingw'
+#   elseif dein#util#_is_cygwin()
+#     let cmd = 'make -f make_cygwin.mak'
+#   elseif executable('gmake')
+#     let cmd = 'gmake'
+#   else
+#     let cmd = 'make'
+#   endif
+#   let g:dein#plugin.build = cmd
+# '''
+# 
+# # ブランチやタグを指定したいとき
+# [[plugins]]
+# repo = 'delphinus35/typescript-vim'
+# rev  = 'colorize-template-strings'
+# 
+# # 特定の条件で読み込みたいとき
+# [[plugins]]
+# repo = 'elzr/vim-json'
+# if   = '''! has('kaoriya')'''
+# 
+# # 依存関係を指定したいとき
+# [[plugins]]
+# repo    = 'vim-airline/vim-airline'
+# depends = ['vim-airline-themes']
+# 
+# # 依存関係を指定したからと言って、自動でインストールはされない（ここは NeoBundle と違う）
+# [[plugins]]
+# repo = 'vim-airline/vim-airline-themes'
