@@ -92,3 +92,4 @@ set t_ut= " avoid background char color
 
 " set completeopt+=noinsert
 set completeopt+=noselect
+set completeopt-=preview
