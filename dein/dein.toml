@@ -7,16 +7,36 @@ repo = 'Shougo/denite.nvim'
 
 # Common
 [[plugins]]
+repo = 'osyo-manga/vim-anzu'
+hook_add = '''
+  let g:anzu_status_format = 'search : %#WarningMsg#%p %#Keyword#(%i/%l)%#None# : status'
+  nnoremap <Esc><Esc> :nohlsearch<CR>
+  nmap n <Plug>(anzu-n-with-echo)
+  nmap N <Plug>(anzu-N-with-echo)
+  nmap * <Plug>(anzu-star-with-echo)N
+  nmap # <Plug>(anzu-)sharp-with-echo)N
+'''
+
+[[plugins]]
 repo = 'itchyny/lightline.vim'
+depends = ['osyo-manga/vim-anzu']
 hook_add = '''
   let g:lightline = {
     \ 'colorscheme': 'powerline',
-    \ 'component': {
-      \   'readonly': '%{&readonly?"⭤":""}',
-      \ },
-    \ 'separator': { 'left': '⮀', 'right': '⮂' },
-    \ 'subseparator': { 'left': '⮁', 'right': '⮃' }
+    \ 'active': {
+    \   'left': [
+    \       ['mode', 'paste'],
+    \       ['readonly', 'filename', 'modified', 'anzu']
+    \   ]
+    \ },
+    \ 'component_function': {
+    \   'anzu': 'anzu#search_status'
     \ }
+    \ }
+    "}}}
+  let g:unite_force_overwrite_statusline    = 0
+  let g:vimfiler_force_overwrite_statusline = 0
+  let g:vimshell_force_overwrite_statusline = 0
 ''' 
 
 [[plugins]]
@@ -37,16 +57,9 @@ hook_add = '''
 # Visual Style
 [[plugins]]
 repo = 'tomasr/molokai'
-
-[[plugins]]
-repo = 'osyo-manga/vim-anzu'
 hook_add = '''
-  let g:anzu_status_format = 'search : %#WarningMsg#%p %#Keyword#(%i/%l)%#None# : status'
-  nnoremap <Esc><Esc> :nohlsearch<CR>
-  nmap n <Plug>(anzu-n-with-echo)
-  nmap N <Plug>(anzu-N-with-echo)
-  nmap * <Plug>(anzu-star-with-echo)N
-  nmap # <Plug>(anzu-)sharp-with-echo)N
+  let g:molokai_original = 1
+  let g:rehash256 = 1
 '''
 
 # Key operation enhancer
