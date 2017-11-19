@@ -1,11 +1,47 @@
+# Shougo-san's
+# dein {{{
 [[plugins]]
 repo = 'Shougo/dein.vim'
+# }}}
 
+# denite {{{
 [[plugins]]
 repo = 'Shougo/denite.nvim'
+hook_add = '''
+  nnoremap [denite] <nop>
+  xnoremap [denite] <nop>
+  nmap <Space> [denite]
+  xmap <Space> [denite]
 
+  " Unite
+  nnoremap [denite]  :Denite
+  nnoremap [denite]b :Denite buffer<CR>
+  nnoremap [denite]o :Denite bookmark<CR>
+  nnoremap [denite]f :Denite find<CR>
+  nnoremap [denite]g :Denite grep<CR>
+  nnoremap [denite]k :Denite fhc<CR>
+  nnoremap [denite]l :Denite line<CR>
+  nnoremap [denite]m :Denite menu<CR>
+  nnoremap [denite]o :Denite outline<CR>
+  nnoremap [denite]s :Denite snippet<CR>
+  nnoremap [denite]t :Denite tab<CR>
+  nnoremap [denite]r :Denite -resume<CR>
+  nnoremap [denite]z :Denite file_old<CR>
+  call denite#custom#map('insert', '<C-n>', '<denite:move_to_next_line>', 'noremap')
+  call denite#custom#map('insert', '<C-p>', '<denite:move_to_previous_line>', 'noremap')
+
+'''
+hook_post_source = '''
+  call denite#custom#var('file_rec', 'command', ['ag', '--follow', '--nocolor', '--nogroup', '-g', ''])
+  call denite#custom#var('grep', 'command', ['ag'])
+  call denite#custom#var('grep', 'recursive_opts', [])
+  call denite#custom#var('grep', 'pattern_opt', [])
+  call denite#custom#var('grep', 'default_opts', ['--follow', '--no-group', '--no-color'])
+'''
+# }}}
 
 # Common
+# vim-anzu {{{
 [[plugins]]
 repo = 'osyo-manga/vim-anzu'
 hook_add = '''
@@ -16,7 +52,9 @@ hook_add = '''
   nmap * <Plug>(anzu-star-with-echo)N
   nmap # <Plug>(anzu-)sharp-with-echo)N
 '''
+# }}}
 
+# lightline {{{
 [[plugins]]
 repo = 'itchyny/lightline.vim'
 depends = ['osyo-manga/vim-anzu']
@@ -24,27 +62,81 @@ hook_add = '''
   let g:lightline = {
     \ 'colorscheme': 'powerline',
     \ 'active': {
-    \   'left': [
-    \       ['mode', 'paste'],
-    \       ['readonly', 'filename', 'modified', 'anzu']
-    \   ]
-    \ },
-    \ 'component_function': {
-    \   'anzu': 'anzu#search_status'
+      \   'left': [
+      \       ['mode', 'paste'],
+      \       ['readonly', 'filename', 'modified', 'anzu']
+      \   ]
+      \ },
+      \ 'component_function': {
+      \   'anzu': 'anzu#search_status'
+      \ }
     \ }
-    \ }
-    "}}}
   let g:unite_force_overwrite_statusline    = 0
   let g:vimfiler_force_overwrite_statusline = 0
   let g:vimshell_force_overwrite_statusline = 0
 ''' 
+# }}}
 
+# yankaround {{{
 [[plugins]]
 repo = 'LeafCage/yankround.vim'
+hook_add = '''
+  nmap p <Plug>(yankround-p)
+  xmap p <Plug>(yankround-p)
+  nmap P <Plug>(yankround-P)
+  nmap gp <Plug>(yankround-gp)
+  xmap gp <Plug>(yankround-gp)
+  nmap gP <Plug>(yankround-gP)
+  nmap <C-p> <Plug>(yankround-prev)
+  nmap <C-n> <Plug>(yankround-next)
+'''
+# }}}
 
+# ctrlp {{{
 [[plugins]]
 repo = 'kien/ctrlp.vim'
+hook_add = '''
+  let g:ctrlp_map = '<C-f>'
+  let g:ctrlp_working_path_mode = ""
+  let g:ctrlp_max_files=0
+  let g:ctrlp_custom_ignore = '\v[\/]\.?(git|hg|svn|node_modules|bower_components)$'
+  let g:ctrlp_prompt_mappings = {
+    \ 'PrtBS()':              ['<bs>'],
+    \ 'PrtDeleteWord()':      ['<del>'],
+    \ 'PrtCurEnd()':          ['<nop>'],
+    \ 'PrtCurLeft()':         ['<nop>'],
+    \ 'PrtCurRight()':        ['<nop>'],
+    \ 'PrtHistory(-1)':       ['<nop>'],
+    \ 'PrtHistory(1)':        ['<nop>'],
+    \ 'PrtInsert()':          ['<nop>'],
+    \ 'PrtCurStart()':        ['<nop>'],
+    \ 'PrtClearCache()':      ['<c-r>'],
+    \ 'PrtDeleteEnt()':       ['<nop>'],
+    \ 'PrtClear()':           ['<c-d>'],
+    \ 'PrtExit()':            ['<nop>', '<esc>', '<c-c>'],
+    \ 'PrtExpandDir()':       ['<tab>'],
+    \ 'PrtDelete()':          ['<nop>'],
+    \ 'PrtSelectMove("t")':   ['<nop>'],
+    \ 'PrtSelectMove("b")':   ['<nop>'],
+    \ 'PrtSelectMove("u")':   ['<nop>'],
+    \ 'PrtSelectMove("d")':   ['<nop>'],
+    \ 'ToggleRegex()':        ['<F5>'],
+    \ 'ToggleByFname()':      ['<nop>'],
+    \ 'ToggleFocus()':        ['<nop>'],
+    \ 'ToggleType(1)':        ['<nop>'],
+    \ 'ToggleType(-1)':       ['<nop>'],
+    \ 'AcceptSelection("e")': ['<cr>'], 
+    \ 'AcceptSelection("h")': ['<nop>'], 
+    \ 'AcceptSelection("t")': ['<nop>'],
+    \ 'AcceptSelection("v")': ['<nop>'],
+    \ 'CreateNewFile()':      ['<nop>'],
+    \ 'MarkToOpen()':         ['<nop>'],
+    \ 'OpenMulti()':          ['<nop>'],
+    \ }
+'''
+# }}}
 
+# vim-textmanip {{{
 [[plugins]]
 repo = 't9md/vim-textmanip'
 hook_add = '''
@@ -53,16 +145,10 @@ hook_add = '''
   vmap <C-h> <Plug>(textmanip-move-left)
   vmap <C-l> <Plug>(textmanip-move-right)
 '''
-
-# Visual Style
-[[plugins]]
-repo = 'tomasr/molokai'
-hook_add = '''
-  let g:molokai_original = 1
-  let g:rehash256 = 1
-'''
+# }}}
 
 # Key operation enhancer
+# vim-arpeggio {{{
 [[plugins]]
 repo = 'kana/vim-arpeggio'
 hook_add = '''
@@ -74,7 +160,6 @@ hook_add = '''
     let g:arpeggio_timeoutlen = 50
     
     " Window
-    " TODO
     Arpeggio nnoremap wh <C-w>h
     Arpeggio nnoremap wj <C-w>j
     Arpeggio nnoremap wk <C-w>k
@@ -97,7 +182,9 @@ hook_add = '''
   
   endif
 '''
+# }}}
 
+# clever-f {{{
 [[plugins]]
 repo = 'rhysd/clever-f.vim'
 hook_source = '''
@@ -107,9 +194,14 @@ hook_source = '''
   let g:clever_f_fix_key_direction = 0
   let g:clever_f_show_prompt       = 1
 '''
+# }}}
 
-# repo = 'tpope/vim-surround'
+# vim-surround {{{
+[[plugins]]
+repo = 'tpope/vim-surround'
+# }}}
 
+# vim-easymotion {{{
 [[plugins]]
 repo = 'Lokaltog/vim-easymotion'
 hook_add = '''
@@ -122,7 +214,9 @@ hook_add = '''
   hi EasyMotionTarget ctermbg=none ctermfg=12  guibg=NONE guifg=#aa0000
   hi EasyMotionShade  ctermbg=none ctermfg=232 guibg=NONE guifg=#222222
 '''
+# }}}
 
+# vim-alignta {{{
 [[plugins]]
 repo = 'h1mesuke/vim-alignta'
 hook_add = '''
@@ -148,40 +242,15 @@ hook_add = '''
 	vnoremap a; :Alignta 11 :/1<CR>
 	vnoremap a, :Alignta 01 ,<CR>
 '''
+# }}}
 
+# Visual Style 
+# molokai {{{
+[[plugins]]
+repo = 'tomasr/molokai'
+hook_add = '''
+  let g:molokai_original = 1
+  let g:rehash256 = 1
+'''
+# }}}
 
-
-# # git clone 後、実行すべきコマンドがある場合はこんな感じ
-# [[plugins]]
-# repo = 'Shougo/vimproc.vim'
-# hook_post_update = '''
-#   if dein#util#_is_windows()
-#     let cmd = 'tools\\update-dll-mingw'
-#   elseif dein#util#_is_cygwin()
-#     let cmd = 'make -f make_cygwin.mak'
-#   elseif executable('gmake')
-#     let cmd = 'gmake'
-#   else
-#     let cmd = 'make'
-#   endif
-#   let g:dein#plugin.build = cmd
-# '''
-# 
-# # ブランチやタグを指定したいとき
-# [[plugins]]
-# repo = 'delphinus35/typescript-vim'
-# rev  = 'colorize-template-strings'
-# 
-# # 特定の条件で読み込みたいとき
-# [[plugins]]
-# repo = 'elzr/vim-json'
-# if   = '''! has('kaoriya')'''
-# 
-# # 依存関係を指定したいとき
-# [[plugins]]
-# repo    = 'vim-airline/vim-airline'
-# depends = ['vim-airline-themes']
-# 
-# # 依存関係を指定したからと言って、自動でインストールはされない（ここは NeoBundle と違う）
-# [[plugins]]
-# repo = 'vim-airline/vim-airline-themes'
