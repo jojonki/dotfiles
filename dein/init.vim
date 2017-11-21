@@ -35,6 +35,7 @@ if dein#load_state('/home/jonki/.config/dein')
   call dein#load_toml(s:toml,      {'lazy': 0})
   call dein#load_toml(s:lazy_toml, {'lazy': 1})
 
+  call dein#add('Shougo/vimproc.vim', {'build': 'make'})
 
   " Required:
   call dein#end()
@@ -91,5 +92,5 @@ set t_ut= " avoid background char color
 
 
 " set completeopt+=noinsert
-set completeopt+=noselect
+" set completeopt+=noselect
 set completeopt-=preview
