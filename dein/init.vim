@@ -19,11 +19,11 @@ if &compatible
 endif
 
 " Required:
-set runtimepath+=/home/jonki/.config/dein/repos/github.com/Shougo/dein.vim
+set runtimepath+=~/.config/dein/repos/github.com/Shougo/dein.vim
 
 " Required:
-if dein#load_state('/home/jonki/.config/dein')
-  call dein#begin('/home/jonki/.config/dein')
+if dein#load_state('~/.config/dein')
+  call dein#begin('~/.config/dein')
 
   " プラグインリストを収めた TOML ファイル
   " 予め TOML ファイル（後述）を用意しておく
