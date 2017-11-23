@@ -184,6 +184,17 @@ hook_add = '''
 '''
 # }}}
 
+# vim-parenmatch {{{
+[[plugins]]
+repo = 'itchyny/vim-parenmatch'
+hook_add = 'let g:loaded_matchparen = 1'
+# }}}
+
+# vim-cursorword {{{
+[[plugins]]
+repo = 'itchyny/vim-cursorword'
+# }}}
+
 # Key operation enhancer
 # vim-arpeggio {{{
 [[plugins]]
