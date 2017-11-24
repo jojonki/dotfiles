@@ -19,7 +19,7 @@ if &compatible
 endif
 
 " Required:
-set runtimepath+=/home/jonki/.config/dein/repos/github.com/Shougo/dein.vim
+set runtimepath+=~/.config/dein/repos/github.com/Shougo/dein.vim
 
 " Required:
 if dein#load_state('~/.config/dein')
@@ -83,12 +83,17 @@ augroup FileDependentIndentSettings
 	autocmd FileType html setlocal ts=2 sw=2
 augroup end
 
+" Color
+autocmd ColorScheme * highlight IncSearch ctermbg=17 ctermfg=255
+autocmd ColorScheme * highlight Search ctermbg=32 ctermfg=255
+colorscheme molokai
+set t_ut= " avoid background char color
+
 " Common
 set number
 set cursorline
 set laststatus=2
-colorscheme molokai
-set t_ut= " avoid background char color
+set hlsearch
 
 " save cursor position
 augroup vimrcEx
