@@ -90,6 +90,12 @@ set laststatus=2
 colorscheme molokai
 set t_ut= " avoid background char color
 
+" save cursor position
+augroup vimrcEx
+  au BufRead * if line("'\"") > 0 && line("'\"") <= line("$") |
+  \ exe "normal g`\"" | endif
+augroup END
+
 
 " set completeopt+=noinsert
 " set completeopt+=noselect
