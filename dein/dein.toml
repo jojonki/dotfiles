@@ -217,6 +217,12 @@ hook_add = '''
     Arpeggio nnoremap wq <C-w>c
     Arpeggio nnoremap w8 <C-w>s<Plug>(anzu-star)N
     Arpeggio nnoremap w3 <C-w>s<Plug>(anzu-sharp)N
+
+    " Resize
+    Arpeggio nnoremap eh <C-w><
+    Arpeggio nnoremap ej <C-w>+
+    Arpeggio nnoremap ek <C-w>-
+    Arpeggio nnoremap el <C-w>>
     
     " Split
     Arpeggio nnoremap sh :vsp<CR>
