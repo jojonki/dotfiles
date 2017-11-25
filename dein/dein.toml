@@ -215,24 +215,25 @@ hook_add = '''
 # vim-arpeggio {{{
 [[plugins]]
 repo = 'kana/vim-arpeggio'
-hook_add = '''
-  if !exists('g:arpeggio_loaded')
-    let g:arpeggio_loaded = 1
+hook_source = '''
+  " if !exists('g:arpeggio_loaded')
+  let g:arpeggio_loaded = 1
   
   " Settings
   call arpeggio#load()
-    let g:arpeggio_timeoutlen = 50
-    
+    let g:arpeggio_timeoutlen = 70
+   
     " Window
     Arpeggio nnoremap wh <C-w>h
     Arpeggio nnoremap wj <C-w>j
     Arpeggio nnoremap wk <C-w>k
     Arpeggio nnoremap wl <C-w>l
-    Arpeggio nnoremap wo <C-w>o
-    Arpeggio nnoremap wc <C-w>c
-    Arpeggio nnoremap wq <C-w>c
+    Arpeggio nnoremap wo <C-w>o " close all but current window
+    Arpeggio nnoremap wc <C-w>c " close current window
+    Arpeggio nnoremap wq <C-w>c " close current window
     Arpeggio nnoremap w8 <C-w>s<Plug>(anzu-star)N
     Arpeggio nnoremap w3 <C-w>s<Plug>(anzu-sharp)N
+    Arpeggio nnoremap wr <C-w>r " 回転
 
     " Resize
     Arpeggio nnoremap eh <C-w><
@@ -250,7 +251,7 @@ hook_add = '''
     Arpeggio nmap em _w
     Arpeggio nmap EM _b
   
-  endif
+  " endif
 '''
 # }}}
 
