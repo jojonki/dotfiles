@@ -8,11 +8,6 @@ repo = 'Shougo/dein.vim'
 [[plugins]]
 repo = 'Shougo/denite.nvim'
 hook_add = '''
-  nnoremap [denite] <nop>
-  xnoremap [denite] <nop>
-  nmap <Space> [denite]
-  xmap <Space> [denite]
-
   nnoremap [denite]  :Denite
   nnoremap [denite]b :Denite buffer -highlight-mode-insert=Search<CR>
   nnoremap [denite]g :Denite grep<CR>
@@ -203,6 +198,19 @@ hook_add = '''
 '''
 # }}}
 
+#  vim-gitgutter {{{
+[[plugins]]
+repo = 'airblade/vim-gitgutter'
+hook_add = '''
+  let g:gitgutter_enabled         = 0
+  let g:gitgutter_highlight_lines = 0
+
+  nnoremap [prefix]gg :GitGutterToggle<CR>
+  nnoremap [prefix]gn :GitGutterNextHunk<CR>
+  nnoremap [prefix]gN :GitGutterPrevHunk<CR>
+'''
+# }}}
+
 # Key operation enhancer
 # vim-arpeggio {{{
 [[plugins]]
@@ -321,11 +329,6 @@ hook_add = '''
 [[plugins]]
 repo = 'thinca/vim-quickrun'
 hook_add = '''
-  nnoremap [prefix] <nop>
-  nmap ,   [prefix]
-  xnoremap [prefix] <nop>
-  xmap ,   [prefix]
-
   "nnoremap [prefix]rm :QuickRun markdown<CR>
   nnoremap [prefix]r :QuickRun<CR>
   " <C-c> で実行を強制終了させる
