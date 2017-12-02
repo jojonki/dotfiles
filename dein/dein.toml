@@ -216,8 +216,8 @@ hook_add = '''
 [[plugins]]
 repo = 'kana/vim-arpeggio'
 hook_source = '''
-  " if !exists('g:arpeggio_loaded')
-  let g:arpeggio_loaded = 1
+  if !exists('g:arpeggio_loaded')
+    let g:arpeggio_loaded = 1
   
   " Settings
   call arpeggio#load()
@@ -251,7 +251,7 @@ hook_source = '''
     Arpeggio nmap em _w
     Arpeggio nmap EM _b
   
-  " endif
+  endif
 '''
 # }}}
 
