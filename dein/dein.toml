@@ -215,7 +215,7 @@ hook_add = '''
 # vim-arpeggio {{{
 [[plugins]]
 repo = 'kana/vim-arpeggio'
-hook_source = '''
+hook_add = '''
   if !exists('g:arpeggio_loaded')
     let g:arpeggio_loaded = 1
   
