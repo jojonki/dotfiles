@@ -86,6 +86,7 @@ nnoremap <C-k> :bp<CR>
 set foldenable
 set foldmethod=marker
 set foldcolumn=1
+au FileType md setlocal foldmethod=indent
 
 " Indent 
 set tabstop=2 shiftwidth=2 softtabstop=0
@@ -96,6 +97,9 @@ augroup FileDependentIndentSettings
 	autocmd!
 	autocmd FileType html setlocal ts=2 sw=2
 augroup end
+
+syntax enable
+syntax on
 
 " Color
 autocmd ColorScheme * highlight IncSearch ctermbg=17 ctermfg=255
@@ -119,3 +123,5 @@ augroup END
 " set completeopt+=noinsert
 " set completeopt+=noselect
 set completeopt-=preview
+
+

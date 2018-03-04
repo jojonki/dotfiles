@@ -24,7 +24,7 @@ hook_add = '''
       \ 'data/',
       \ 'images/',
       \ '*.min.*',
-      \ 'fonts/'
+      \ 'fonts/',
       \ 'ishaly/',
       \ 'logs*/',
       \ 'pickle/',
@@ -35,8 +35,7 @@ hook_add = '''
       \ 'checkpoints*/',
       \ 'obsolete/',
       \ '*.model',
-      \ 'checkpoints*/'
-      ])
+      \ 'checkpoints*/'])
 
 '''
 #  call denite#custom#filter('matcher_ignore_globs', 'ignore_globs', ['.txt'])
