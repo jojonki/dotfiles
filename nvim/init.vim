@@ -123,5 +123,3 @@ augroup END
 " set completeopt+=noinsert
 " set completeopt+=noselect
 set completeopt-=preview
-
-
