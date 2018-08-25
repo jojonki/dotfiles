@@ -61,5 +61,5 @@ on_ft = ['toml']
 
 [[plugins]]
 repo = 'tomtom/tcomment_vim'
-on_ft = ['javascript', 'python']
+on_ft = ['javascript', 'python', 'go']
 
