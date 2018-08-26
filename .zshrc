@@ -18,7 +18,45 @@ typeset -A ZSH_HIGHLIGHT_STYLES
 # To differentiate aliases from other command types
 ZSH_HIGHLIGHT_STYLES[globbing]='fg=magenta'
 
-zplug 'themes/wedisagree', from:oh-my-zsh
+# zplug 'themes/wedisagree', from:oh-my-zsh
+# Hecomi Terminal Appearance {{{
+
+# Color
+local gray=$'%{\e[0;30m%}'
+local red=$'%{\e[0;31m%}'
+local green=$'%{\e[0;32m%}'
+local yellow=$'%{\e[0;33m%}'
+local blue=$'%{\e[0;34m%}'
+local purple=$'%{\e[0;35m%}'
+local light_blue=$'%{\e[0;36m%}'
+local white=$'%{\e[0;37m%}'
+local GRAY=$'%{\e[1;30m%}'
+local RED=$'%{\e[1;31m%}'
+local GREEN=$'%{\e[1;32m%}'
+local YELLOW=$'%{\e[1;33m%}'
+local BLUE=$'%{\e[1;34m%}'
+local PURPLE=$'%{\e[1;35m%}'
+local LIGHT_BLUE=$'%{\e[1;36m%}'
+local WHITE=$'%{\e[1;37m%}'
+local DEFAULT=$white
+
+# Prompt
+local HOSTC=$GREEN
+case ${HOST} in
+hecom)
+	HOSTC=$PURPLE
+	;;
+*)
+	[ -n "${REMOTEHOST}${SSH_CONNECTION}" ] &&
+		HOSTC=$YELLOW
+	;;
+esac
+PROMPT=$HOSTC'${USER}'$RED'@'$HOSTC'${HOST}'$RED'%(!.#.$) '$DEFAULT
+PROMPT2=$blue'%_> '$DEFAULT
+RPROMPT=$WHITE'[%~]'$DEFAULT
+SPROMPT=$BLUE'correct: '$WHITE'%R'$BLUE' -> '$YELLOW'%r'$BLUE' [nyae]? '$DEFAULT
+setopt PROMPT_SUBST
+# }}}
 
 # smart change directory
 zplug "b4b4r07/enhancd", use:init.sh
@@ -82,22 +120,31 @@ if [ -x /usr/bin/dircolors ]; then
   test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
 fi
 alias l="ls"
-alias ls="ls -F --color"
 # }}}
 
 # PATH {{{
-export EDITOR=/user/bin/vim
-export PATH="$HOME/anaconda3/bin:$PATH"
+export EDITOR=/usr/bin/vim
+export PATH="$HOME/anaconda/bin:$PATH"
+export PATH="$HOME/.nodebrew/current/bin:$PATH"
 export XDG_CONFIG_HOME="$HOME/.config"
+export GOPATH="/Users/jonki/go"
 
 # CUDA
-export CUDA_HOME=/usr/local/cuda
-export PATH=$PATH:$CUDA_HOME/bin
-export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$CUDA_HOME/lib64
+#export CUDA_HOME=/usr/local/cuda
+#export PATH=$PATH:$CUDA_HOME/bin
+#export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$CUDA_HOME/lib64
 # }}}
 
-# others {{{
+# bind keys {{{
 # to avoid overriding problem of oh-my-zsh
 bindkey '^A' beginning-of-line
 bindkey '^E' end-of-line
+# }}}
+
+# google cloud {{{
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f "$HOME/work/google-cloud-sdk/path.zsh.inc" ]; then source "$HOME/work/google-cloud-sdk/path.zsh.inc"; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f "$HOME/work/google-cloud-sdk/completion.zsh.inc" ]; then source "$HOME/work/google-cloud-sdk/completion.zsh.inc"; fi
 # }}}
