@@ -217,6 +217,11 @@ hook_add = '''
 '''
 # }}}
 
+#  vim-bufkill {{{
+[[plugins]]
+repo = 'qpkorr/vim-bufkill'
+# }}}
+
 # Key operation enhancer
 # vim-arpeggio {{{
 [[plugins]]
@@ -234,6 +239,7 @@ hook_add = '''
     Arpeggio nnoremap wj <C-w>j
     Arpeggio nnoremap wk <C-w>k
     Arpeggio nnoremap wl <C-w>l
+    Arpeggio nnoremap wb :BD<CR> " close buffer without closing window by vim-bufkill
     Arpeggio nnoremap wo <C-w>o " close all but current window
     Arpeggio nnoremap wc <C-w>c " close current window
     Arpeggio nnoremap wq <C-w>c " close current window
