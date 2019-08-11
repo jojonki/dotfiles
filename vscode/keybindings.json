@@ -1,47 +1,11 @@
-// 既定値を上書きするには、このファイル内にキー バインドを挿入します
+// Place your key bindings in this file to override the defaultsauto[]
 [
-    { "key": "ctrl+9",  "command": "workbench.action.previousEditor" },
-    { "key": "ctrl+0",  "command": "workbench.action.nextEditor" },
     {
-        "key": "cmd+r",
-        "command": "code-runner.run"
+        "key": "ctrl+;",            "command": "workbench.action.terminal.focus",
+                                    "when": "editorTextFocus"
     },
     {
-        "key": "ctrl+f5",
-        "command": "workbench.action.debug.run",
-        "when": "!inDebugMode"
-    },
-    {
-        "key": "f5",
-        "command": "workbench.action.debug.start",
-        "when": "!inDebugMode"
-    },
-    {
-        "key": "f5",
-        "command": "-workbench.action.debug.start",
-        "when": "!inDebugMode"
-    },
-    {
-        "key": "cmd+f5",
-        "command": "-workbench.action.debug.run",
-        "when": "!inDebugMode"
-    },
-    {
-        "key": "shift+f5",
-        "command": "workbench.action.debug.stop",
-        "when": "inDebugMode"
-    },
-    {
-        "key": "shift+f5",
-        "command": "-workbench.action.debug.stop",
-        "when": "inDebugMode"
-    },
-    {
-        "key": "shift+cmd+r",
-        "command": "code-runner.stop"
-    },
-    {
-        "key": "ctrl+alt+m",
-        "command": "-code-runner.stop"
+        "key": "ctrl+;",            "command": "workbench.action.focusFirstEditorGroup",
+                                    "when": "terminalFocus"
     }
 ]
