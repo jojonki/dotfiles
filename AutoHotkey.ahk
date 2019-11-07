@@ -48,3 +48,9 @@ SetWorkingDir %A_ScriptDir% ; Ensures a consistent starting directory.
   ^0::Send, ^{Tab}
   ^9::Send, ^+{Tab}
 #ifWinActive
+
+
+#ifWinActive ahk_exe excel.exe
+ ^0::Send, ^{PgDn}
+ ^9::Send, ^{PgUp}
+#ifWinActive
