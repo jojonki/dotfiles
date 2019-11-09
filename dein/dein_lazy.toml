@@ -49,6 +49,18 @@ hook_add = '''
 '''
 
 [[plugins]]
+repo = 'Shougo/echodoc'
+on_ft = ['py']
+hook_add = '''
+  "set noshowmode
+  "let g:echodoc_enable_at_startup = 1
+  let g:echodoc#echodoc_enable_at_startup = 1
+  let g:echodoc#type = 'floating'
+  highlight link EchoDocFloat Pmenu
+
+'''
+
+[[plugins]]
 repo = 'plasticboy/vim-markdown'
 on_ft = ['md', 'markdown']
 hook_add = '''
