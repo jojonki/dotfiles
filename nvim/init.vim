@@ -49,7 +49,8 @@ if dein#load_state('~/.config/dein')
   call dein#load_toml(s:toml,      {'lazy': 0})
   call dein#load_toml(s:lazy_toml, {'lazy': 1})
 
-  call dein#add('Shougo/vimproc.vim', {'build': 'make'})
+  " to delete old packages
+  call map(dein#check_clean(), "delete(v:val, 'rf')")
 
   " Required:
   call dein#end()
@@ -106,6 +107,8 @@ autocmd ColorScheme * highlight IncSearch ctermbg=17 ctermfg=255
 autocmd ColorScheme * highlight Search ctermbg=32 ctermfg=255
 colorscheme molokai
 set t_ut= " avoid background char color
+hi Pmenu ctermbg=4 ctermfg=15
+hi PmenuSel ctermbg=11 ctermfg=0
 
 " Common
 set number
