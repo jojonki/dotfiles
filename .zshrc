@@ -12,56 +12,14 @@ setopt prompt_subst
 # command compleitions
 zplug "zsh-users/zsh-completions"
 
-# color 
-zplug "zsh-users/zsh-syntax-highlighting"
+zplug "zsh-users/zsh-syntax-highlighting", defer:2
+zplug "b4b4r07/zsh-vimode-visual", defer:3
+
 typeset -A ZSH_HIGHLIGHT_STYLES
 # To differentiate aliases from other command types
 ZSH_HIGHLIGHT_STYLES[globbing]='fg=magenta'
 
-# zplug 'themes/wedisagree', from:oh-my-zsh
-# Hecomi Terminal Appearance {{{
-
-# Color
-local gray=$'%{\e[0;30m%}'
-local red=$'%{\e[0;31m%}'
-local green=$'%{\e[0;32m%}'
-local yellow=$'%{\e[0;33m%}'
-local blue=$'%{\e[0;34m%}'
-local purple=$'%{\e[0;35m%}'
-local light_blue=$'%{\e[0;36m%}'
-local white=$'%{\e[0;37m%}'
-local GRAY=$'%{\e[1;30m%}'
-local RED=$'%{\e[1;31m%}'
-local GREEN=$'%{\e[1;32m%}'
-local YELLOW=$'%{\e[1;33m%}'
-local BLUE=$'%{\e[1;34m%}'
-local PURPLE=$'%{\e[1;35m%}'
-local LIGHT_BLUE=$'%{\e[1;36m%}'
-local WHITE=$'%{\e[1;37m%}'
-local DEFAULT=$white
-
-# Prompt
-local HOSTC=$GREEN
-case ${HOST} in
-hecom)
-	HOSTC=$PURPLE
-	;;
-*)
-	[ -n "${REMOTEHOST}${SSH_CONNECTION}" ] &&
-		HOSTC=$YELLOW
-	;;
-esac
-PROMPT=$HOSTC'${USER}'$RED'@'$HOSTC'${HOST}'$RED'%(!.#.$) '$DEFAULT
-PROMPT2=$blue'%_> '$DEFAULT
-RPROMPT=$WHITE'[%~]'$DEFAULT
-SPROMPT=$BLUE'correct: '$WHITE'%R'$BLUE' -> '$YELLOW'%r'$BLUE' [nyae]? '$DEFAULT
-setopt PROMPT_SUBST
-# }}}
-
-# smart change directory
-zplug "b4b4r07/enhancd", use:init.sh
-
-# peco
+# peco {{{
 zplug "peco/peco", as:command
 function peco-select-history() {
     local tac
@@ -81,6 +39,65 @@ if [ -x "`which peco`" ]; then
   alias tp='top | peco'
   alias pp='ps aux | peco'
 fi
+# }}}
+
+# smart change directory
+zplug "b4b4r07/enhancd", use:init.sh
+
+# Prompt {{{
+autoload -Uz colors; colors
+autoload -Uz add-zsh-hook
+autoload -Uz terminfo
+
+terminfo_down_sc=$terminfo[cud1]$terminfo[cuu1]$terminfo[sc]$terminfo[cud1]
+left_down_prompt_preexec() {
+    print -rn -- $terminfo[el]
+}
+add-zsh-hook preexec left_down_prompt_preexec
+
+function zle-keymap-select zle-line-init zle-line-finish
+{
+    case $KEYMAP in
+        main|viins)
+            PROMPT_2="$fg[cyan]-- INSERT --$reset_color"
+            ;;
+        vicmd)
+            PROMPT_2="$fg[white]-- NORMAL --$reset_color"
+            ;;
+        vivis|vivli)
+            PROMPT_2="$fg[yellow]-- VISUAL --$reset_color"
+            ;;
+    esac
+
+    PROMPT="%{$terminfo_down_sc$PROMPT_2$terminfo[rc]%}[%(?.%{${fg[green]}%}.%{${fg[red]}%})%n@%m%{${reset_color}%}]$ "
+    RPROMPT=$WHITE'[%~]'$DEFAULT
+    zle reset-prompt
+}
+
+zle -N zle-line-init
+zle -N zle-line-finish
+zle -N zle-keymap-select
+zle -N edit-command-line
+# }}}
+
+# dircolors {{{
+zplug "seebi/dircolors-solarized"
+DIR_COLORS_F=~/.zplug/repos/seebi/dircolors-solarized/dircolors.ansi-light
+echo $DIR_COLORS_F
+if [ -f $DIR_COLORS_F ]; then
+    if type dircolors > /dev/null 2>&1; then
+        eval $(dircolors $DIR_COLORS_F)
+    elif type gdircolors > /dev/null 2>&1; then
+        eval $(gdircolors $DIR_COLORS_F)
+    fi
+fi
+if [ -n "$LS_COLORS" ]; then
+    zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
+fi
+
+alias ls='gls --color=auto'
+alias l='ls'
+# }}}
 
 if ! zplug check --verbose; then
   printf "Install? [y/N]: "
@@ -111,21 +128,16 @@ setopt inc_append_history
 # aliases
 alias h="history"
 alias history="history -i"
-# }}}
 
-# other aliases {{{
 alias vim="nvim"
 alias vi="nvim"
-if [ -x /usr/bin/dircolors ]; then
-  test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
-fi
-alias l="ls"
 # }}}
 
 # PATH {{{
 export EDITOR=/usr/bin/vim
-export PATH="$HOME/anaconda/bin:$PATH"
+export PATH="$HOME/anaconda3/bin:$PATH"
 export PATH="$HOME/.nodebrew/current/bin:$PATH"
+export PATH=$HOME/.nodebrew/current/bin:$PATH
 export XDG_CONFIG_HOME="$HOME/.config"
 export GOPATH="/Users/jonki/go"
 
@@ -136,15 +148,39 @@ export GOPATH="/Users/jonki/go"
 # }}}
 
 # bind keys {{{
-# to avoid overriding problem of oh-my-zsh
-bindkey '^A' beginning-of-line
-bindkey '^E' end-of-line
+bindkey -M viins '^A'  beginning-of-line
+bindkey -M viins '^E'  end-of-line
+bindkey -M vicmd '^A'  beginning-of-line
+bindkey -M vicmd '^E'  end-of-line
+
+bindkey -M viins '^N'  down-history
+bindkey -M viins '^P'  up-history
+
+# text-object {{{
+# https://qiita.com/ToruIwashita/items/eaefada1346e97d09fdb
+autoload -U select-bracketed
+zle -N select-bracketed
+for m in visual viopp; do
+  for c in {a,i}${(s..)^:-'()[]{}<>bB'}; do
+    bindkey -M $m $c select-bracketed
+  done
+done
+
+autoload -U select-quoted
+zle -N select-quoted
+for m in visual viopp; do
+  for c in {a,i}{\',\",\`}; do
+    bindkey -M $m $c select-quoted
+  done
+done
+
+autoload -Uz surround
+zle -N delete-surround surround
+zle -N change-surround surround
+zle -N add-surround surround
+bindkey -a cs change-surround
+bindkey -a ds delete-surround
+bindkey -a ys add-surround
+bindkey -M visual S add-surround
 # }}}
-
-# google cloud {{{
-# The next line updates PATH for the Google Cloud SDK.
-if [ -f "$HOME/work/google-cloud-sdk/path.zsh.inc" ]; then source "$HOME/work/google-cloud-sdk/path.zsh.inc"; fi
-
-# The next line enables shell command completion for gcloud.
-if [ -f "$HOME/work/google-cloud-sdk/completion.zsh.inc" ]; then source "$HOME/work/google-cloud-sdk/completion.zsh.inc"; fi
 # }}}
