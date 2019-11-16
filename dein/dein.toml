@@ -395,7 +395,7 @@ hook_add = '''
 '''
 # }}}
 
-# LSP
+# LSP {{{
 [[plugins]]
 repo = 'neoclide/coc.nvim'
 rev = 'release'
@@ -410,13 +410,6 @@ hook_add = '''
   nmap <leader>rn <Plug>(coc-rename)
   " Highlight symbol under cursor on CursorHold
   autocmd CursorHold * silent call CocActionAsync('highlight')
-  " Use K for show documentation in preview window
-  nnoremap <silent> K :call <SID>show_documentation()<CR>
-  function! s:show_documentation()
-    if &filetype == 'vim'
-      execute 'h '.expand('<cword>')
-    else
-      call CocAction('doHover')
-    endif
-  endfunction
+  nnoremap <silent> S :call CocAction('doHover')<CR>
 '''
+# }}}
