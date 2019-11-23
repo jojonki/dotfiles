@@ -152,6 +152,8 @@ hook_add = '''
     \ 'PrtSelectMove("b")':   ['<nop>'],
     \ 'PrtSelectMove("u")':   ['<nop>'],
     \ 'PrtSelectMove("d")':   ['<nop>'],
+    \ 'PrtSelectMove("j")':   ['<c-j>', '<down>'],
+    \ 'PrtSelectMove("k")':   ['<c-k>', '<up>'],
     \ 'ToggleRegex()':        ['<F5>'],
     \ 'ToggleByFname()':      ['<nop>'],
     \ 'ToggleFocus()':        ['<nop>'],
@@ -395,7 +397,7 @@ hook_add = '''
 '''
 # }}}
 
-# LSP {{{
+# LSP
 [[plugins]]
 repo = 'neoclide/coc.nvim'
 rev = 'release'
@@ -410,6 +412,13 @@ hook_add = '''
   nmap <leader>rn <Plug>(coc-rename)
   " Highlight symbol under cursor on CursorHold
   autocmd CursorHold * silent call CocActionAsync('highlight')
-  nnoremap <silent> S :call CocAction('doHover')<CR>
+  " Use K for show documentation in preview window
+  nnoremap <silent> K :call <SID>show_documentation()<CR>
+  function! s:show_documentation()
+    if &filetype == 'vim'
+      execute 'h '.expand('<cword>')
+    else
+      call CocAction('doHover')
+    endif
+  endfunction
 '''
-# }}}
