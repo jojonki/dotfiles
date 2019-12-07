@@ -95,7 +95,9 @@ if [ -n "$LS_COLORS" ]; then
     zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
 fi
 
-alias ls='gls --color=auto'
+if [ "$(uname 2> /dev/null)" == "Darwin" ]; then
+    alias ls='gls --color=auto'
+fi
 alias l='ls'
 # }}}
 
