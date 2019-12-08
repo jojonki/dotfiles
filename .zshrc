@@ -107,7 +107,12 @@ alias l='ls'
 # }}}
 
 if ! zplug check --verbose; then
+  printf "Install? [y/N]: "
+  if read -q; then
     echo; zplug install
+  else
+    echo
+  fi
 fi
 
 zplug load --verbose
