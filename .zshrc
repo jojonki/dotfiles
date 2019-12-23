@@ -70,10 +70,10 @@ function zle-keymap-select zle-line-init zle-line-finish
     esac
 
     PROMPT="%{$terminfo_down_sc$PROMPT_2$terminfo[rc]%}[%(?.%{${fg[green]}%}.%{${fg[red]}%})%n@%m%{${reset_color}%}]%# "
-    RPROMPT=$WHITE'[%~]'$DEFAULT
     zle reset-prompt
 }
 
+RPROMPT=$WHITE'[%~]'$DEFAULT
 zle -N zle-line-init
 zle -N zle-line-finish
 zle -N zle-keymap-select
