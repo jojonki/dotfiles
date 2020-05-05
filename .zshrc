@@ -69,7 +69,8 @@ function zle-keymap-select zle-line-init zle-line-finish
             ;;
     esac
 
-    PROMPT="%{$terminfo_down_sc$PROMPT_2$terminfo[rc]%}[%(?.%{${fg[green]}%}.%{${fg[red]}%})%n@%m%{${reset_color}%}]%# "
+    local virtualenv_path="$CONDA_DEFAULT_ENV"
+    PROMPT="%{$terminfo_down_sc$PROMPT_2$terminfo[rc]%}%(?.%{${fg[green]}%}.%{${fg[red]}%})%n@%m%{${reset_color}%} ($virtualenv_path) %# "
     zle reset-prompt
 }
 
