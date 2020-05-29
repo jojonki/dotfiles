@@ -74,5 +74,5 @@ on_ft = ['toml']
 
 [[plugins]]
 repo = 'tomtom/tcomment_vim'
-on_ft = ['javascript', 'python', 'go', 'html', 'js', 'vue', 'sh']
+on_ft = ['javascript', 'python', 'go', 'html', 'js', 'vue', 'sh', 'cc']
 
