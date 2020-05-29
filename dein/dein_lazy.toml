@@ -26,9 +26,11 @@ hook_add = '''
 
   " 有効にするlinter
   let g:ale_linters = {
-  "\   'python': ['flake8'],
   \   'python': ['pylint'],
   \}
+  let g:ale_fixers = {
+  \   'python': ['trim_whitespace', 'isort', 'yapf'],
+  \ }
 
   " ALE用プレフィックス
   nnoremap [prefix] <nop>
@@ -38,6 +40,8 @@ hook_add = '''
   " エラー行にジャンプ
   nmap <silent> [prefix]<C-P> <Plug>(ale_previous)
   nmap <silent> [prefix]<C-N> <Plug>(ale_next)
+  " autoformat
+  nmap <silent> [prefix]f <Plug>(ale_fix)
 '''
 
 [[plugins]]
