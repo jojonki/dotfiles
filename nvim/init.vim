@@ -90,7 +90,7 @@ set foldcolumn=1
 au FileType md setlocal foldmethod=indent
 
 " Indent 
-set tabstop=2 shiftwidth=2 softtabstop=0
+set tabstop=4 shiftwidth=4 softtabstop=0
 set expandtab
 set autoindent
 
@@ -127,3 +127,6 @@ augroup END
 " set completeopt+=noinsert
 " set completeopt+=noselect
 set completeopt-=preview
+
+let g:python_host_prog = '~/anaconda3/envs/neovim3/bin/python'
+let g:python3_host_prog = '~/anaconda3/envs/neovim3/bin/python'
