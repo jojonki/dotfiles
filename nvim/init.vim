@@ -128,5 +128,5 @@ augroup END
 " set completeopt+=noselect
 set completeopt-=preview
 
-let g:python_host_prog = '~/anaconda3/envs/neovim3/bin/python'
-let g:python3_host_prog = '~/anaconda3/envs/neovim3/bin/python'
+let g:python_host_prog = expand('~/anaconda3/envs/neovim3/bin/python')
+let g:python3_host_prog = expand('~/anaconda3/envs/neovim3/bin/python')
