@@ -55,7 +55,11 @@ hook_add = '''
 [[plugins]]
 repo = 'Shougo/vimproc.vim'
 hook_post_update = '''
-  if executable('gmake')
+  if dein#util#_is_windows()
+    let cmd = 'tools\\update-dll-mingw'
+  elseif dein#util#_is_cygwin()
+    let cmd = 'make -f make_cygwin.mak'
+  elseif executable('gmake')
     let cmd = 'gmake'
   else
     let cmd = 'make'
@@ -144,12 +148,12 @@ hook_add = '''
     \ 'PrtExit()':            ['<nop>', '<esc>', '<c-c>'],
     \ 'PrtExpandDir()':       ['<tab>'],
     \ 'PrtDelete()':          ['<nop>'],
+    \ 'PrtSelectMove("j")':   ['<c-j>', '<down>'],
+    \ 'PrtSelectMove("k")':   ['<c-k>', '<up>'],
     \ 'PrtSelectMove("t")':   ['<nop>'],
     \ 'PrtSelectMove("b")':   ['<nop>'],
     \ 'PrtSelectMove("u")':   ['<nop>'],
     \ 'PrtSelectMove("d")':   ['<nop>'],
-    \ 'PrtSelectMove("j")':   ['<c-j>', '<down>'],
-    \ 'PrtSelectMove("k")':   ['<c-k>', '<up>'],
     \ 'ToggleRegex()':        ['<F5>'],
     \ 'ToggleByFname()':      ['<nop>'],
     \ 'ToggleFocus()':        ['<nop>'],
@@ -212,6 +216,14 @@ hook_add = '''
 #  vim-bufkill {{{
 [[plugins]]
 repo = 'qpkorr/vim-bufkill'
+# }}}
+
+# explorer {{{
+[[plugins]]
+repo = 'scrooloose/nerdtree'
+hook_add = '''
+nnoremap [prefix]e :NERDTreeToggle<CR>
+'''
 # }}}
 
 # Key operation enhancer
@@ -394,6 +406,7 @@ hook_add = '''
 # }}}
 
 # LSP
+# coc {{{
 [[plugins]]
 repo = 'neoclide/coc.nvim'
 rev = 'release'
@@ -418,3 +431,4 @@ hook_add = '''
     endif
   endfunction
 '''
+# }}}
