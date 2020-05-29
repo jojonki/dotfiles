@@ -42,15 +42,6 @@ hook_add = '''
 '''
 # }}}
 
-# deoplete {{{
-#[[plugins]]
-#repo = 'Shougo/deoplete.nvim'
-#hook_add = '''
-#  let g:deoplete#enable_at_startup = 1
-#  set completeopt+=noinsert
-#'''
-# }}}
-
 # vimproc {{{
 [[plugins]]
 repo = 'Shougo/vimproc.vim'
@@ -411,18 +402,16 @@ hook_add = '''
 repo = 'neoclide/coc.nvim'
 rev = 'release'
 merge = 0
-build = 'coc#util#install()'
 hook_add = '''
   nmap <silent> gd <Plug>(coc-definition)
-  nmap <silent> gy <Plug>(coc-type-definition)
-  nmap <silent> gi <Plug>(coc-implementation)
+  " nmap <silent> gy <Plug>(coc-type-definition)
+  " nmap <silent> gi <Plug>(coc-implementation)
   nmap <silent> gr <Plug>(coc-references)
   " Remap for rename current word
-  nmap <leader>rn <Plug>(coc-rename)
+  nmap <silent> gn <Plug>(coc-rename)
   " Highlight symbol under cursor on CursorHold
   autocmd CursorHold * silent call CocActionAsync('highlight')
-  " Use K for show documentation in preview window
-  nnoremap <silent> K :call <SID>show_documentation()<CR>
+  nnoremap <silent> gp :call <SID>show_documentation()<CR>
   function! s:show_documentation()
     if &filetype == 'vim'
       execute 'h '.expand('<cword>')
