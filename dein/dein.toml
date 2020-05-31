@@ -165,10 +165,10 @@ hook_add = '''
 [[plugins]]
 repo = 't9md/vim-textmanip'
 hook_add = '''
-  vmap <C-s> <Plug>(textmanip-move-down)
-  vmap <C-w> <Plug>(textmanip-move-up)
-  vmap <C-a> <Plug>(textmanip-move-left)
-  vmap <C-d> <Plug>(textmanip-move-right)
+  vmap <C-d> <Plug>(textmanip-move-down)
+  vmap <C-e> <Plug>(textmanip-move-up)
+  vmap <C-s> <Plug>(textmanip-move-left)
+  vmap <C-f> <Plug>(textmanip-move-right)
 '''
 # }}}
 
