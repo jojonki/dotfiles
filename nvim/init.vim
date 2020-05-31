@@ -115,7 +115,7 @@ set number
 set cursorline
 set laststatus=2
 set hlsearch
-set clipboard=unnamed
+" set clipboard=unnamed
 
 " save cursor position
 augroup vimrcEx
