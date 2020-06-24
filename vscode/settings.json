@@ -1,39 +1,40 @@
 {
-  "vim.insertModeKeyBindings": [
-    {
-      "before": ["j", "j"],
-      "after": ["ctrl", "t"]
-    }
-  ],
-  "vim.otherModesKeyBindingsNonRecursive": [
-    {
-      "before": ["J"],
-      "after": ["j", "j", "j", "j", "j", "j", "j", "j", "j", "j"]
+    "C_Cpp.updateChannel": "Insiders",
+    "vim.easymotion": true,
+    "vim.leader": "<space>",
+    "vim.easymotionKeys": "sdfghjkl",
+    "C_Cpp.clang_format_fallbackStyle": "{BasedOnStyle: Google, IndentWidth: 4}",
+    "sync.gist": "a0e904cb189fb4d5123553cb7e501eab",
+    "window.zoomLevel": 0,
+    "terminal.integrated.inheritEnv": false,
+    "editor.formatOnSave": true,
+    "editor.codeActionsOnSave": {
+        "source.organizeImports": true
     },
-    {
-      "before": ["K"],
-      "after": ["k", "k", "k", "k", "k", "k", "k", "k", "k", "k"]
+    "python.linting.pylintArgs": [
+        "--generated-members=numpy.*,torch.*"
+    ],
+    "vim.handleKeys": {
+        "<C-y>": true,
+        "<C-e>": true,
+        "<C-v>": true,
+        "<C-d>": true,
+        "<C-u>": true,
+        "<C-r>": true
     },
-    {
-      "before": ["L"],
-      "after": ["$"]
-    },
-    {
-      "before": ["H"],
-      "after": ["^"]
-    }
-  ]
-  ,
-  "vim.searchHighlightColor": "rgba(25, 50, 255, 0.3)",
-  "vim.handleKeys": {
-    "<C-f>": false,
-    "<C-a>": false,
-    "<C-c>": false,
-    "<C-x>": false,
-    "<C-w>": false
-  },
-  "python.linting.pylintEnabled": true,
-  "python.linting.pylintArgs": [
-    "--extension-pkg-whitelist=numpy"
-    ]
+    "vim.normalModeKeyBindings": [
+        {
+            "before": [
+                "<leader>",
+                "w"
+            ],
+            "after": [
+                "<leader>",
+                "<leader>",
+                "w"
+            ]
+        }
+    ],
+    "terminal.integrated.shell.linux": "/bin/zsh",
+    "workbench.editor.enablePreview": false
 }
